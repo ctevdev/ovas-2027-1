@@ -1,0 +1,16 @@
+# Archivos temporales de control de calidad
+_qa/
+
+# Herramientas auxiliares locales
+tools/
+
+# Archivos temporales del sistema y editores
+Thumbs.db
+.DS_Store
+~$*.docx
+*.tmp
+
+# Dependencias y salidas de desarrollo
+node_modules/
+dist/
+
