@@ -12,6 +12,6 @@ Thumbs.db
 
 # Dependencias y salidas de desarrollo
 node_modules/
-dist/
+/dist/
 _site_publish/
 
