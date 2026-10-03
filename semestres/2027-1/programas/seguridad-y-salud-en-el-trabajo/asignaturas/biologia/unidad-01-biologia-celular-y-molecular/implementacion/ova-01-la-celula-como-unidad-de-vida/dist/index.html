@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="OVA universitario sobre la célula como unidad de vida, los niveles de organización y los métodos para construir evidencia biológica.">
   <title>OVA 1 La célula como unidad de vida</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a2942'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%235dd9c1' stroke-width='5'/%3E%3Ccircle cx='37' cy='27' r='6' fill='%23ffb454'/%3E%3Ccircle cx='24' cy='39' r='3' fill='%23ffffff'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2344388A'/%3E%3Ccircle cx='32' cy='32' r='18' fill='none' stroke='%237FDEE0' stroke-width='5'/%3E%3Ccircle cx='37' cy='27' r='6' fill='%23EA4B8B'/%3E%3Ccircle cx='24' cy='39' r='3' fill='%23ffffff'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
   <script src="app.js" defer></script>
 </head>
@@ -17,17 +17,21 @@
       <span class="eyebrow">Biología · Unidad 1 · OVA 01</span>
       <strong>OVA 1 La célula como unidad de vida</strong>
     </div>
-    <div class="progress-block" aria-live="polite">
-      <span id="progress-label">Etapa 1 de 14</span>
-      <div class="progress-track" role="progressbar" aria-label="Progreso del OVA" aria-valuemin="1" aria-valuemax="14" aria-valuenow="1">
-        <span id="progress-fill"></span>
+    <div class="topbar-tools">
+      <div class="progress-block" aria-live="polite">
+        <span id="progress-label">Avance validado: 0 % · 0 de 14 etapas</span>
+        <div class="progress-track" role="progressbar" aria-label="Progreso validado del OVA" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span id="progress-fill"></span>
+        </div>
       </div>
+      <button id="restart-ova" class="restart-button" type="button">Reiniciar OVA</button>
     </div>
   </header>
 
   <div class="app-shell">
     <aside class="rail" aria-label="Ruta de aprendizaje">
       <p class="rail-title">Ruta de aprendizaje</p>
+      <p class="rail-help">El avance se valida al completar correctamente cada etapa.</p>
       <ol id="step-list">
         <li><button type="button" data-go="0"><span>01</span>Portada</button></li>
         <li><button type="button" data-go="1"><span>02</span>Propósito</button></li>
@@ -66,6 +70,7 @@
             <div><span>4</span><strong>Conclusión</strong><small>¿Qué puede afirmarse?</small></div>
           </div>
         </div>
+        <img class="program-iconography" src="assets/brand/iconografia-sst.png" alt="Iconografía institucional de experiencias de aprendizaje, recursos didácticos, actividades, información de la asignatura y espacios de interacción.">
         <details class="reading-block" open>
           <summary><span>Lectura de contexto</span> ¿Por qué este tema importa en Seguridad y Salud en el Trabajo?</summary>
           <div class="reading-content">
@@ -74,6 +79,11 @@
             <p class="reading-source">Síntesis basada en la introducción y contextualización del módulo.</p>
           </div>
         </details>
+        <div class="stage-check">
+          <div><label for="reading-check-0">¿Qué permite esta base científica?</label><select id="reading-check-0" data-reading-expected="evidence"><option value="">Selecciona</option><option value="diagnosis">Diagnosticar por sí sola un riesgo biológico</option><option value="evidence">Formular preguntas e interpretar evidencia con mayor rigor</option></select></div>
+          <button class="primary" type="button" data-complete-step="0">Validar lectura</button>
+          <div class="feedback" id="reading-feedback-0" role="status" hidden></div>
+        </div>
       </section>
 
       <section class="lesson-screen" data-step="1" aria-labelledby="s2-title" hidden>
@@ -93,6 +103,11 @@
             <p class="reading-source">Síntesis basada en la introducción y contextualización del módulo aprobado.</p>
           </div>
         </details>
+        <div class="stage-check">
+          <div><label for="reading-check-1">¿Cuál es el propósito principal del OVA?</label><select id="reading-check-1" data-reading-expected="foundation"><option value="">Selecciona</option><option value="diagnosis">Confirmar inmediatamente agentes presentes</option><option value="foundation">Comprender la organización celular y molecular antes de estudiar agentes específicos</option></select></div>
+          <button class="primary" type="button" data-complete-step="1">Validar propósito</button>
+          <div class="feedback" id="reading-feedback-1" role="status" hidden></div>
+        </div>
       </section>
 
       <section class="lesson-screen" data-step="2" aria-labelledby="s3-title" hidden>
@@ -108,6 +123,11 @@
           <p><strong>Se conecta con.</strong> El reconocimiento de la organización biomolecular de los seres vivos, virus y bacterias, y su relación con el ambiente laboral.</p>
           <p><strong>Nivel cognitivo.</strong> El recorrido avanza de comprender y aplicar hacia analizar, evaluar y transferir.</p>
           <p><strong>Evidencia final.</strong> Seleccionarás métodos, detectarás errores y justificarás conclusiones proporcionales a los datos.</p>
+        </div>
+        <div class="stage-check">
+          <div><label for="reading-check-2">¿Qué debes integrar al finalizar?</label><select id="reading-check-2" data-reading-expected="integrate"><option value="">Selecciona</option><option value="memorize">Una lista aislada de nombres y definiciones</option><option value="integrate">Citología, bioquímica y genética en el análisis de la célula</option></select></div>
+          <button class="primary" type="button" data-complete-step="2">Validar resultado</button>
+          <div class="feedback" id="reading-feedback-2" role="status" hidden></div>
         </div>
       </section>
 
@@ -383,10 +403,21 @@
           <button class="primary" type="submit">Revisar transferencia</button>
           <div class="feedback" id="transfer-feedback" role="status" hidden></div>
         </form>
-        <div class="completion" id="completion" hidden>
-          <span aria-hidden="true">✓</span>
-          <div><strong>OVA completado</strong><p>Has construido una base para avanzar al estudio de virus, bacterias y factores biológicos en el ambiente laboral.</p></div>
-        </div>
+        <section class="completion achievement" id="completion" aria-labelledby="badge-title" hidden>
+          <div class="badge-medallion" aria-hidden="true">
+            <span>Insignia</span>
+            <strong>100%</strong>
+            <small>OVA completado</small>
+          </div>
+          <div class="achievement-copy">
+            <p class="kicker">Insignia de cumplimiento</p>
+            <h3 id="badge-title">La célula como unidad de vida</h3>
+            <p>Completaste correctamente las 14 etapas. Has construido una base para avanzar al estudio de virus, bacterias y factores biológicos en el ambiente laboral.</p>
+            <label for="badge-name">Nombre para personalizar la insignia<input id="badge-name" type="text" maxlength="80" placeholder="Escribe tu nombre"></label>
+            <p class="badge-recipient">Otorgada a <strong id="badge-recipient">Estudiante</strong></p>
+            <button id="download-badge" class="primary" type="button">Descargar insignia</button>
+          </div>
+        </section>
       </section>
 
       <nav class="lesson-nav" aria-label="Navegación entre etapas">
@@ -398,7 +429,7 @@
   </div>
 
   <footer>
-    <p>Biología · Seguridad y Salud en el Trabajo a Distancia</p>
+    <div class="footer-brand"><img src="assets/brand/universidad-cartagena-ctev.png" alt="Universidad de Cartagena y Centro Tecnológico para la Formación Virtual y a Distancia, CTEV."><p>Biología · Seguridad y Salud en el Trabajo a Distancia</p></div>
     <details><summary>Referencias del módulo</summary><p>Hardin, J., y Lodolce, J. P. (2024). <em>Becker. El mundo de la célula</em>. Pearson Educación. Vázquez Conde, R. (2018). <em>Biología 1</em> (3.ª ed.). Grupo Editorial Patria.</p></details>
   </footer>
 </body>

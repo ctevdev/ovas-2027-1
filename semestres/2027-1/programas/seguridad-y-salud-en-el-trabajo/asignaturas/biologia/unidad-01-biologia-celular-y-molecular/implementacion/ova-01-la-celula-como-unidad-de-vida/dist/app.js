@@ -8,11 +8,47 @@ const navStatus = document.querySelector("#nav-status");
 const progressLabel = document.querySelector("#progress-label");
 const progressBar = document.querySelector(".progress-track");
 const progressFill = document.querySelector("#progress-fill");
+const restartButton = document.querySelector("#restart-ova");
+const completionPanel = document.querySelector("#completion");
+const badgeName = document.querySelector("#badge-name");
+const badgeRecipient = document.querySelector("#badge-recipient");
+const levelsList = document.querySelector("#levels-list");
+const initialLevelsMarkup = levelsList.innerHTML;
 const completedSteps = new Set();
 let currentStep = 0;
 
+try {
+  const stored = JSON.parse(localStorage.getItem("ova01-completed-steps") || "[]");
+  stored.filter((step) => Number.isInteger(step) && step >= 0 && step < screens.length).forEach((step) => completedSteps.add(step));
+} catch (_) {
+  // Continue with an empty progress record when storage is unavailable.
+}
+
+function firstIncompleteStep() {
+  const index = screens.findIndex((_, step) => !completedSteps.has(step));
+  return index === -1 ? screens.length - 1 : index;
+}
+
+function persistProgress() {
+  try {
+    localStorage.setItem("ova01-completed-steps", JSON.stringify(Array.from(completedSteps).sort((a, b) => a - b)));
+  } catch (_) {
+    // Progress still works during the current session.
+  }
+}
+
+function updateProgress() {
+  const completed = completedSteps.size;
+  const percentage = Math.round((completed / screens.length) * 100);
+  progressLabel.textContent = `Avance validado: ${percentage} % · ${completed} de ${screens.length} etapas`;
+  progressBar.setAttribute("aria-valuenow", String(percentage));
+  progressFill.style.width = `${percentage}%`;
+  completionPanel.hidden = completed !== screens.length;
+}
+
 function showStep(step, focus = true) {
-  const bounded = Math.max(0, Math.min(step, screens.length - 1));
+  const highestAvailable = firstIncompleteStep();
+  const bounded = Math.max(0, Math.min(step, highestAvailable, screens.length - 1));
   currentStep = bounded;
 
   screens.forEach((screen, index) => {
@@ -21,20 +57,19 @@ function showStep(step, focus = true) {
 
   stepButtons.forEach((button, index) => {
     button.classList.toggle("active", index === bounded);
-    button.classList.toggle("visited", index < bounded || completedSteps.has(index));
+    button.classList.toggle("completed", completedSteps.has(index));
+    button.disabled = index > highestAvailable;
+    button.setAttribute("aria-label", `${button.textContent.trim()}${completedSteps.has(index) ? ", completada" : index > highestAvailable ? ", bloqueada" : ", disponible"}`);
     if (index === bounded) button.setAttribute("aria-current", "step");
     else button.removeAttribute("aria-current");
   });
 
   const humanStep = bounded + 1;
-  const percentage = (humanStep / screens.length) * 100;
-  progressLabel.textContent = `Etapa ${humanStep} de ${screens.length}`;
   navStatus.textContent = `${humanStep} / ${screens.length}`;
-  progressBar.setAttribute("aria-valuenow", String(humanStep));
-  progressFill.style.width = `${percentage}%`;
   previousButton.disabled = bounded === 0;
-  nextButton.disabled = bounded === screens.length - 1;
-  nextButton.textContent = bounded === screens.length - 2 ? "Ir a transferencia →" : "Siguiente →";
+  nextButton.disabled = bounded === screens.length - 1 || !completedSteps.has(bounded);
+  nextButton.textContent = bounded === screens.length - 1 ? "Recorrido completado" : completedSteps.has(bounded) ? "Siguiente etapa →" : "Completa la etapa para continuar";
+  updateProgress();
 
   window.scrollTo({ top: 0, behavior: "smooth" });
   const heading = screens[bounded].querySelector("h1, h2");
@@ -52,7 +87,8 @@ function showFeedback(id, type, title, message) {
 
 function markComplete(step = currentStep) {
   completedSteps.add(step);
-  stepButtons[step]?.classList.add("visited");
+  persistProgress();
+  showStep(currentStep, false);
 }
 
 function selectedValue(form, name) {
@@ -77,6 +113,23 @@ document.querySelectorAll(".hint-button").forEach((button) => {
   });
 });
 
+document.querySelectorAll("[data-complete-step]").forEach((button) => {
+  button.addEventListener("click", () => {
+    const step = Number(button.dataset.completeStep);
+    const check = button.closest(".stage-check").querySelector("select[data-reading-expected]");
+    const feedbackId = `reading-feedback-${step}`;
+    if (!check.value) {
+      showFeedback(feedbackId, "neutral", "Selecciona una respuesta", "Lee nuevamente la idea central y elige la opción que corresponda.");
+    } else if (check.value === check.dataset.readingExpected) {
+      markComplete(step);
+      button.textContent = "Etapa validada";
+      showFeedback(feedbackId, "success", "Comprensión verificada", "La etapa quedó registrada en tu avance. Ya puedes continuar.");
+    } else {
+      showFeedback(feedbackId, "error", "Revisa la idea central", "Esta etapa distingue una base de comprensión científica de una conclusión o diagnóstico que requiere evidencia adicional.");
+    }
+  });
+});
+
 document.querySelector("#activation-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const form = event.currentTarget;
@@ -86,9 +139,11 @@ document.querySelector("#activation-form").addEventListener("submit", (event) =>
     showFeedback("activation-feedback", "neutral", "Selecciona una respuesta", "Después podrás contrastar tu razonamiento con la evidencia del caso.");
     return;
   }
-  if (answer === "false") {
+  if (answer === "false" && reason.length >= 15) {
     markComplete(3);
     showFeedback("activation-feedback", "success", "La afirmación es falsa", `${reason ? "Tu justificación queda registrada. " : ""}Comprender la organización celular es una base científica necesaria, pero determinar un riesgo biológico exige identificar agentes, exposición y condiciones mediante evidencia adicional.`);
+  } else if (answer === "false") {
+    showFeedback("activation-feedback", "neutral", "Justifica tu decisión", "La selección es correcta. Para validar la etapa, explica en una frase por qué hacen falta datos adicionales sobre agentes, exposición o condiciones.");
   } else {
     showFeedback("activation-feedback", "error", "La base no equivale al diagnóstico", "Conocer la organización celular ayuda a comprender los agentes biológicos, pero no demuestra por sí solo que estén presentes ni que exista exposición o riesgo.");
   }
@@ -100,9 +155,11 @@ document.querySelector("#perspectives-form").addEventListener("submit", (event) 
   const reflection = document.querySelector("#perspective-limit").value.trim();
   if (result.unanswered) {
     showFeedback("perspectives-feedback", "neutral", "Completa las asociaciones", "Estructura, reacciones e información son las tres pistas principales.");
-  } else if (result.allCorrect) {
+  } else if (result.allCorrect && reflection.length >= 15) {
     markComplete(4);
     showFeedback("perspectives-feedback", "success", "Las tres perspectivas se complementan", `${reflection ? "Tu explicación reconoce la necesidad de integrar perspectivas. " : ""}Observar estructuras, analizar reacciones y comprender el flujo de información responden preguntas distintas sobre una misma célula.`);
+  } else if (result.allCorrect) {
+    showFeedback("perspectives-feedback", "neutral", "Completa la explicación", "Las asociaciones son correctas. Para validar la etapa, explica qué se perdería al estudiar la célula desde una sola perspectiva.");
   } else {
     showFeedback("perspectives-feedback", "error", `${result.correct} de ${result.total} asociaciones correctas`, "Relaciona citología con estructura, bioquímica con reacciones y genética con información. Después explica por qué una sola perspectiva sería incompleta.");
   }
@@ -212,8 +269,8 @@ document.querySelector("#assessment-form").addEventListener("submit", (event) =>
     showFeedback("assessment-feedback", "neutral", "Completa las cuatro evidencias", "Responde también la pregunta abierta conectando la organización biológica con el estudio posterior de agentes específicos.");
     return;
   }
-  markComplete(11);
   if (score === 4) {
+    markComplete(11);
     showFeedback("assessment-feedback", "success", "Dominio alto · 4 de 4", "Reconoces la teoría celular, seleccionas un método pertinente, identificas el aporte de la genética y conectas esta base con el estudio de agentes biológicos.");
   } else if (score >= 2) {
     showFeedback("assessment-feedback", "neutral", `Dominio intermedio · ${score} de 4`, "Comprendes varias ideas centrales. Revisa los campos marcados y fortalece la relación entre organización celular, método y evidencia.");
@@ -226,9 +283,9 @@ document.querySelector("#reflection-form").addEventListener("submit", (event) =>
   event.preventDefault();
   const form = event.currentTarget;
   const data = Object.fromEntries(new FormData(form));
-  const answered = Object.values(data).filter((value) => value.trim()).length;
-  if (answered < 2) {
-    showFeedback("reflection-feedback", "neutral", "Profundiza un poco más", "Responde al menos dos preguntas para hacer visible tu estrategia de razonamiento.");
+  const completeAnswers = Object.values(data).filter((value) => value.trim().length >= 20).length;
+  if (completeAnswers < 3) {
+    showFeedback("reflection-feedback", "neutral", "Profundiza un poco más", "Para validar la etapa, responde las tres preguntas con al menos una idea completa en cada campo.");
     return;
   }
   try {
@@ -250,10 +307,74 @@ document.querySelector("#transfer-form").addEventListener("submit", (event) => {
   } else if (concepts.length >= 4) {
     markComplete(13);
     showFeedback("transfer-feedback", "success", "Transferencia lograda", "Tu respuesta conecta la organización biológica con la futura identificación de virus y bacterias y reconoce que la aplicación laboral requiere evidencia específica.");
-    document.querySelector("#completion").hidden = false;
   } else {
     showFeedback("transfer-feedback", "error", "Haz más explícita la conexión", "Incluye la relación entre niveles celular y molecular, agentes como virus o bacterias, el ambiente laboral y la necesidad de métodos o evidencia para identificarlos.");
   }
+});
+
+function escapeXml(value) {
+  return value.replace(/[<>&'\"]/g, (character) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;", "'": "&apos;", "\"": "&quot;" })[character]);
+}
+
+badgeName.addEventListener("input", () => {
+  badgeRecipient.textContent = badgeName.value.trim() || "Estudiante";
+});
+
+document.querySelector("#download-badge").addEventListener("click", () => {
+  if (completedSteps.size !== screens.length) return;
+  const recipient = escapeXml(badgeName.value.trim() || "Estudiante");
+  const date = new Intl.DateTimeFormat("es-CO", { dateStyle: "long" }).format(new Date());
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+    <rect width="1200" height="1200" rx="72" fill="#f7fbfc"/>
+    <path d="M0 0h1200v250H0z" fill="#44388A"/>
+    <circle cx="600" cy="480" r="240" fill="#7FDEE0" stroke="#44388A" stroke-width="28"/>
+    <circle cx="600" cy="480" r="188" fill="#fff" stroke="#EA4B8B" stroke-width="18"/>
+    <text x="600" y="410" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="54" font-weight="700" fill="#44388A">INSIGNIA</text>
+    <text x="600" y="535" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="118" font-weight="800" fill="#44388A">100%</text>
+    <text x="600" y="605" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="34" font-weight="700" fill="#44388A">OVA COMPLETADO</text>
+    <text x="600" y="815" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="52" font-weight="800" fill="#26233F">La célula como unidad de vida</text>
+    <text x="600" y="900" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="38" fill="#44388A">Otorgada a ${recipient}</text>
+    <text x="600" y="965" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="28" fill="#5a5672">${escapeXml(date)}</text>
+    <text x="600" y="1080" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="28" font-weight="700" fill="#44388A">Universidad de Cartagena · CTEV</text>
+    <rect x="100" y="1110" width="1000" height="12" rx="6" fill="#EA4B8B"/>
+  </svg>`;
+  const url = URL.createObjectURL(new Blob([svg], { type: "image/svg+xml" }));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "insignia-ova-01-celula-unidad-de-vida.svg";
+  link.click();
+  URL.revokeObjectURL(url);
+});
+
+document.querySelectorAll("[data-complete-step]").forEach((button) => {
+  button.dataset.defaultLabel = button.textContent;
+  if (completedSteps.has(Number(button.dataset.completeStep))) button.textContent = "Etapa validada";
+});
+
+restartButton.addEventListener("click", () => {
+  if (!window.confirm("¿Deseas borrar el avance y comenzar nuevamente desde la primera etapa?")) return;
+  completedSteps.clear();
+  document.querySelectorAll("form").forEach((form) => form.reset());
+  document.querySelectorAll(".feedback").forEach((feedback) => {
+    feedback.hidden = true;
+    feedback.className = "feedback";
+    feedback.replaceChildren();
+  });
+  document.querySelectorAll("[aria-invalid]").forEach((field) => field.removeAttribute("aria-invalid"));
+  document.querySelectorAll("[data-complete-step]").forEach((button) => {
+    button.textContent = button.dataset.defaultLabel;
+  });
+  levelsList.innerHTML = initialLevelsMarkup;
+  badgeName.value = "";
+  badgeRecipient.textContent = "Estudiante";
+  completionPanel.hidden = true;
+  try {
+    localStorage.removeItem("ova01-completed-steps");
+    localStorage.removeItem("ova01-reflection");
+  } catch (_) {
+    // The reset remains effective during the current session.
+  }
+  showStep(0);
 });
 
 previousButton.addEventListener("click", () => showStep(currentStep - 1));
@@ -299,7 +420,7 @@ function registerWebMcpTools() {
           throw new Error("La etapa debe ser un número entero entre 1 y 14.");
         }
         showStep(input.section - 1, false);
-        return { section: input.section, title: screens[input.section - 1].querySelector("h1, h2")?.textContent ?? "" };
+        return { section: currentStep + 1, title: screens[currentStep].querySelector("h1, h2")?.textContent ?? "", requestedSection: input.section, locked: currentStep + 1 !== input.section };
       }
     }, { signal: lifecycle.signal }),
     context.registerTool({
@@ -309,7 +430,7 @@ function registerWebMcpTools() {
       inputSchema: { type: "object", properties: {}, additionalProperties: false },
       annotations: { readOnlyHint: true, untrustedContentHint: false },
       execute() {
-        return { currentSection: currentStep + 1, totalSections: screens.length, completedSections: Array.from(completedSteps, (step) => step + 1) };
+        return { currentSection: currentStep + 1, totalSections: screens.length, completedSections: Array.from(completedSteps, (step) => step + 1), percentage: Math.round((completedSteps.size / screens.length) * 100), badgeUnlocked: completedSteps.size === screens.length };
       }
     }, { signal: lifecycle.signal })
   ];

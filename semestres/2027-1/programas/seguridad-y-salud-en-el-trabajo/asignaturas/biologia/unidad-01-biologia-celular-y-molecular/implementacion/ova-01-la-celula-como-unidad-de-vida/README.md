@@ -10,18 +10,22 @@ El archivo de entrada es `dist/index.html`. El OVA no requiere instalación de d
 
 - `dist/index.html`: contenido y estructura semántica.
 - `dist/styles.css`: diseño adaptable para escritorio, tableta, móvil e impresión.
-- `dist/app.js`: navegación, actividades, retroalimentación, autoevaluación, persistencia local de la reflexión y herramientas WebMCP.
+- `dist/app.js`: navegación secuencial, validación de actividades, progreso persistente, reinicio, insignia descargable y herramientas WebMCP.
+- `dist/assets/fonts`: familia tipográfica institucional Montserrat y su licencia OFL.
+- `dist/assets/brand`: logos e iconografía institucional para Seguridad y Salud en el Trabajo.
 - `.openai/hosting.json`: configuración de publicación del sitio estático.
 
 ## Funcionalidad verificada
 
-- Navegación entre 14 etapas.
-- Progreso accesible.
+- Navegación secuencial entre 14 etapas; una etapa futura solo se habilita al completar correctamente la actual.
+- Progreso accesible calculado exclusivamente con etapas validadas.
 - Retroalimentación para respuestas correctas, incompletas e incorrectas.
 - Activación verdadero/falso, asociación de perspectivas, ordenamiento de niveles, selección de métodos, análisis de error y decisión metodológica.
 - Autoevaluación con niveles de dominio.
 - Reflexión guardada en el dispositivo cuando el navegador lo permite.
 - Actividad final de transferencia.
+- Insignia de cumplimiento personalizable y descargable al alcanzar el 100 %.
+- Reinicio completo disponible en cualquier momento.
 - Navegación por teclado y alternativa accesible al arrastre.
 - Respeto por la preferencia de movimiento reducido.
 
