@@ -86,37 +86,11 @@ document.querySelector("#activation-form").addEventListener("submit", (event) =>
     showFeedback("activation-feedback", "neutral", "Selecciona una respuesta", "Después podrás contrastar tu razonamiento con la evidencia del caso.");
     return;
   }
-  if (answer === "verificar") {
-    markComplete(1);
-    showFeedback("activation-feedback", "success", "Decisión rigurosa", `${reason ? "Tu justificación queda registrada. " : ""}La observación permite formular una pregunta, pero no confirma por sí sola la presencia de bacterias. Falta identificar la naturaleza del material con evidencia adecuada.`);
-  } else {
-    showFeedback("activation-feedback", "error", "La conclusión se adelantó a la evidencia", "Has convertido una observación en una confirmación. Revisa qué dato falta para identificar la naturaleza del material e inténtalo de nuevo.");
-  }
-});
-
-document.querySelector("#contrast-form").addEventListener("submit", (event) => {
-  event.preventDefault();
-  const answer = selectedValue(event.currentTarget, "contrast");
-  if (answer === "b") {
-    markComplete(2);
-    showFeedback("contrast-feedback", "success", "El grado de certeza es adecuado", "“Puede ser” plantea una posibilidad que necesita comprobación. “Demuestra” presenta como confirmado algo que todavía no cuenta con evidencia suficiente.");
-  } else if (answer === "a") {
-    showFeedback("contrast-feedback", "error", "Observa el verbo utilizado", "La humedad puede ser relevante, pero no demuestra por sí misma la presencia de microorganismos. El lenguaje técnico debe reflejar los límites de la evidencia.");
-  } else {
-    showFeedback("contrast-feedback", "neutral", "Elige una explicación", "Compara las palabras “demuestra” y “puede ser” antes de decidir.");
-  }
-});
-
-document.querySelector("#scales-form").addEventListener("submit", (event) => {
-  event.preventDefault();
-  const result = evaluateSelects(event.currentTarget);
-  if (result.unanswered) {
-    showFeedback("scales-feedback", "neutral", "Completa las cuatro clasificaciones", "Identifica primero la unidad principal de análisis de cada pregunta.");
-  } else if (result.allCorrect) {
+  if (answer === "false") {
     markComplete(3);
-    showFeedback("scales-feedback", "success", "Escalas conectadas", "La pregunta puede concentrarse en una célula o en una molécula, pero comprender la función suele exigir conectar ambas escalas.");
+    showFeedback("activation-feedback", "success", "La afirmación es falsa", `${reason ? "Tu justificación queda registrada. " : ""}Comprender la organización celular es una base científica necesaria, pero determinar un riesgo biológico exige identificar agentes, exposición y condiciones mediante evidencia adicional.`);
   } else {
-    showFeedback("scales-feedback", "error", `${result.correct} de ${result.total} relaciones correctas`, "Revisa los campos marcados. Pregunta qué unidad se estudia principalmente y si la explicación exige integrar la otra escala.");
+    showFeedback("activation-feedback", "error", "La base no equivale al diagnóstico", "Conocer la organización celular ayuda a comprender los agentes biológicos, pero no demuestra por sí solo que estén presentes ni que exista exposición o riesgo.");
   }
 });
 
@@ -162,7 +136,7 @@ document.querySelector("#levels-list").addEventListener("click", (event) => {
 
 document.querySelector("#check-levels").addEventListener("click", () => {
   const order = Array.from(document.querySelectorAll("#levels-list li"), (item) => item.dataset.value);
-  const expected = ["atomo", "molecula", "celula", "tejido", "organismo"];
+  const expected = ["quimico", "molecular", "celular", "tejidos", "organos"];
   if (order.every((value, index) => value === expected[index])) {
     markComplete(6);
     showFeedback("levels-feedback", "success", "Orden correcto", "El nivel molecular se integra en el celular; las células pueden formar tejidos y contribuir a niveles superiores.");
@@ -176,12 +150,12 @@ document.querySelector("#evidence-matrix-form").addEventListener("submit", (even
   event.preventDefault();
   const result = evaluateSelects(event.currentTarget);
   if (result.unanswered) {
-    showFeedback("evidence-matrix-feedback", "neutral", "Completa la matriz", "La evidencia debe corresponder tanto a la pregunta como a la escala.");
+    showFeedback("evidence-matrix-feedback", "neutral", "Completa las tres decisiones", "Relaciona cada pregunta con el tipo de información que produce el método.");
   } else if (result.allCorrect) {
     markComplete(7);
-    showFeedback("evidence-matrix-feedback", "success", "Correspondencia coherente", "Visualizar una organización celular y analizar componentes moleculares requieren evidencias generales diferentes. Ninguna técnica responde todas las preguntas.");
+    showFeedback("evidence-matrix-feedback", "success", "Métodos bien seleccionados", "El microscopio óptico permite observar formas celulares generales; el electrónico revela detalles finos; y las técnicas bioquímicas permiten analizar composición química.");
   } else {
-    showFeedback("evidence-matrix-feedback", "error", `${result.correct} de ${result.total} campos correctos`, "Revisa si deseas observar una estructura o analizar los componentes que participan en un proceso.");
+    showFeedback("evidence-matrix-feedback", "error", `${result.correct} de ${result.total} métodos correctos`, "Distingue entre observar una forma general, visualizar detalles muy pequeños y determinar composición química.");
   }
 });
 
@@ -203,13 +177,15 @@ document.querySelector("#report-form").addEventListener("submit", (event) => {
   const answer = selectedValue(event.currentTarget, "report");
   if (answer === "b") {
     markComplete(9);
-    showFeedback("report-feedback", "success", "Informe proporcional a la evidencia", "La redacción conserva lo observado, reconoce lo que falta y no diagnostica un riesgo específico.");
+    showFeedback("report-feedback", "success", "Error metodológico identificado", "El microscopio óptico aporta información visual sobre formas y estructuras, pero no determina por sí solo la composición exacta de proteínas. Esa pregunta requiere técnicas bioquímicas.");
   } else if (answer === "a") {
-    showFeedback("report-feedback", "error", "La conclusión sobreinterpreta", "No hay datos que confirmen la naturaleza bacteriana del material. Formula primero una pregunta comprobable.");
+    showFeedback("report-feedback", "error", "La observación no revela toda la composición", "Una imagen microscópica no ofrece automáticamente la identidad y cantidad exactas de las proteínas de una muestra.");
   } else if (answer === "c") {
-    showFeedback("report-feedback", "error", "La condición se descartó sin análisis", "No puedes confirmar un agente, pero tampoco declarar irrelevante la humedad sin examinarla. Distingue prudencia de indiferencia.");
+    showFeedback("report-feedback", "error", "El tamaño no resuelve el problema", "Cambiar el tamaño de la muestra no transforma la microscopía óptica en un método para determinar composición proteica exacta.");
+  } else if (answer === "d") {
+    showFeedback("report-feedback", "error", "Sí existen métodos pertinentes", "Las técnicas bioquímicas permiten separar, identificar o cuantificar componentes como las proteínas, según la pregunta de estudio.");
   } else {
-    showFeedback("report-feedback", "neutral", "Selecciona un informe", "Busca la redacción que diferencie lo observado de lo que aún debe verificarse.");
+    showFeedback("report-feedback", "neutral", "Selecciona una explicación", "Compara la información que produce un microscopio óptico con la que se obtiene mediante un análisis bioquímico.");
   }
 });
 
@@ -229,20 +205,20 @@ document.querySelector("#branch-form").addEventListener("submit", (event) => {
 document.querySelector("#assessment-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const result = evaluateSelects(event.currentTarget);
-  const correction = document.querySelector("#error-correction").value.trim().toLowerCase();
-  const correctionScore = ["observ", "evid", "requiere", "determinar", "podría"].filter((token) => correction.includes(token)).length;
-  const score = result.correct + (correctionScore >= 2 ? 1 : 0);
-  if (result.unanswered || !correction) {
-    showFeedback("assessment-feedback", "neutral", "Completa las cuatro evidencias", "Incluye una corrección que separe observación, posibilidad y evidencia faltante.");
+  const transfer = document.querySelector("#transfer-answer").value.trim().toLowerCase();
+  const transferScore = ["celul", "molecular", "organiz", "virus", "bacter", "agente", "evid", "ambiente", "riesgo"].filter((token) => transfer.includes(token)).length;
+  const score = result.correct + (transferScore >= 3 ? 1 : 0);
+  if (result.unanswered || !transfer) {
+    showFeedback("assessment-feedback", "neutral", "Completa las cuatro evidencias", "Responde también la pregunta abierta conectando la organización biológica con el estudio posterior de agentes específicos.");
     return;
   }
   markComplete(11);
   if (score === 4) {
-    showFeedback("assessment-feedback", "success", "Dominio alto · 4 de 4", "Diferencias escalas y perspectivas, organizas los niveles y corriges una conclusión desproporcionada. Puedes avanzar a la reflexión final.");
+    showFeedback("assessment-feedback", "success", "Dominio alto · 4 de 4", "Reconoces la teoría celular, seleccionas un método pertinente, identificas el aporte de la genética y conectas esta base con el estudio de agentes biológicos.");
   } else if (score >= 2) {
-    showFeedback("assessment-feedback", "neutral", `Dominio intermedio · ${score} de 4`, "Comprendes las ideas centrales. Revisa los campos marcados y fortalece la diferencia entre observación, hipótesis y conclusión.");
+    showFeedback("assessment-feedback", "neutral", `Dominio intermedio · ${score} de 4`, "Comprendes varias ideas centrales. Revisa los campos marcados y fortalece la relación entre organización celular, método y evidencia.");
   } else {
-    showFeedback("assessment-feedback", "error", `Dominio inicial · ${score} de 4`, "Vuelve a las secciones de escalas y evidencia. El objetivo es justificar qué puede afirmarse con los datos disponibles.");
+    showFeedback("assessment-feedback", "error", `Dominio inicial · ${score} de 4`, "Vuelve a las secciones de teoría celular, perspectivas y métodos antes de intentarlo de nuevo.");
   }
 });
 
@@ -261,24 +237,22 @@ document.querySelector("#reflection-form").addEventListener("submit", (event) =>
     // The reflection remains visible even if browser storage is unavailable.
   }
   markComplete(12);
-  showFeedback("reflection-feedback", "success", "Reflexión registrada", "Has identificado la información determinante y los aspectos que necesitas revisar. Esta actividad no se califica.");
+  showFeedback("reflection-feedback", "success", "Reflexión registrada", "Has relacionado la célula como unidad de vida con las perspectivas científicas y la selección de métodos. Esta actividad no se califica.");
 });
 
 document.querySelector("#transfer-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const data = Object.fromEntries(new FormData(event.currentTarget));
-  const filled = Object.values(data).every((value) => value.trim().length >= 12);
-  const observationIsCareful = !/bacteria|hongo|contaminaci[oó]n/i.test(data.observation);
-  const hypothesisIsConditional = /podr|posib|hip[oó]tes|favore|relacion/i.test(data.hypothesis);
-  const questionSeeksEvidence = /evid|dato|m[eé]todo|identific|determinar/i.test(data.question);
-  if (!filled) {
-    showFeedback("transfer-feedback", "neutral", "Completa la ruta", "Escribe una observación, una hipótesis y una pregunta suficientemente claras.");
-  } else if (observationIsCareful && hypothesisIsConditional && questionSeeksEvidence) {
+  const answer = data.transfer.trim();
+  const concepts = ["celul", "molecular", "organiz", "virus", "bacter", "agente", "evid", "identific", "ambiente", "labor"].filter((token) => answer.toLowerCase().includes(token));
+  if (answer.length < 40) {
+    showFeedback("transfer-feedback", "neutral", "Amplía tu respuesta", "Explica cómo la organización celular y molecular orientará la identificación posterior de agentes biológicos y qué evidencia será necesaria.");
+  } else if (concepts.length >= 4) {
     markComplete(13);
-    showFeedback("transfer-feedback", "success", "Transferencia lograda", "La observación no interpreta, la hipótesis plantea una posibilidad y la pregunta orienta la obtención de evidencia. Has aplicado el razonamiento a una situación diferente.");
+    showFeedback("transfer-feedback", "success", "Transferencia lograda", "Tu respuesta conecta la organización biológica con la futura identificación de virus y bacterias y reconoce que la aplicación laboral requiere evidencia específica.");
     document.querySelector("#completion").hidden = false;
   } else {
-    showFeedback("transfer-feedback", "error", "Ajusta la relación entre los tres campos", "Evita identificar un agente en la observación, formula la hipótesis como posibilidad y haz que la pregunta solicite datos o un método de verificación.");
+    showFeedback("transfer-feedback", "error", "Haz más explícita la conexión", "Incluye la relación entre niveles celular y molecular, agentes como virus o bacterias, el ambiente laboral y la necesidad de métodos o evidencia para identificarlos.");
   }
 });
 

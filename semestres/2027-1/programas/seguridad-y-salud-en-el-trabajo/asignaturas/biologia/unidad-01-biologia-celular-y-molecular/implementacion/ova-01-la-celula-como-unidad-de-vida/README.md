@@ -1,6 +1,6 @@
-# OVA 01 De la observación a la explicación celular
+# OVA 01 La célula como unidad de vida
 
-Experiencia HTML5 interactiva basada en el guion instruccional de la Unidad 1.
+Experiencia HTML5 interactiva adaptada al contenido académico aprobado de la Unidad 1, con lecturas de contexto, actividades formativas y transferencia al campo de Seguridad y Salud en el Trabajo.
 
 ## Abrir
 
@@ -18,7 +18,7 @@ El archivo de entrada es `dist/index.html`. El OVA no requiere instalación de d
 - Navegación entre 14 etapas.
 - Progreso accesible.
 - Retroalimentación para respuestas correctas, incompletas e incorrectas.
-- Clasificación, asociación, ordenamiento, toma de decisiones y caso ramificado.
+- Activación verdadero/falso, asociación de perspectivas, ordenamiento de niveles, selección de métodos, análisis de error y decisión metodológica.
 - Autoevaluación con niveles de dominio.
 - Reflexión guardada en el dispositivo cuando el navegador lo permite.
 - Actividad final de transferencia.

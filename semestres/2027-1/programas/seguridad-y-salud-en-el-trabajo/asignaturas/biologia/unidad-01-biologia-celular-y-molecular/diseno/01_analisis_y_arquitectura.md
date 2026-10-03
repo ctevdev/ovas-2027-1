@@ -121,13 +121,13 @@ La unidad empieza en comprender e identificar, pero sus desempeños centrales co
 
 | OVA | Tema | Resultado de aprendizaje | Bloom predominante | Actividad principal | Duración |
 |---|---|---|---|---|---|
-| 1 | De la observación a la explicación celular | Analizar una situación biológica diferenciando la escala celular de la molecular y seleccionando evidencia coherente con la pregunta. | Analizar | Caso ramificado sobre una afirmación de contaminación bacteriana sin evidencia suficiente. | 30 min |
+| 1 | La célula como unidad de vida | Analizar la célula como unidad básica, integrando citología, bioquímica y genética, y relacionarla con la comprensión de factores biológicos laborales. | Comprender y analizar | Selección de métodos, análisis de error y transferencia al estudio de virus y bacterias. | 45 min |
 | 2 | Del nivel químico al sistema celular | Relacionar niveles de organización y propiedades del agua con consecuencias básicas para el funcionamiento celular. | Aplicar | Construcción guiada de una cadena propiedad consecuencia función. | 25 min |
 | 3 | Energía estructura y membrana | Comparar carbohidratos y lípidos para justificar sus funciones energéticas, estructurales y de organización de membranas. | Analizar | Clasificación razonada y construcción conceptual de una membrana. | 30 min |
 | 4 | Proteínas e información biológica | Explicar cómo la estructura de proteínas y ácidos nucleicos se relaciona con función y flujo de información celular. | Analizar | Análisis de errores sobre secuencia estructura función y ADN ARN proteína. | 35 min |
 | 5 | La célula como sistema y base para el análisis laboral | Integrar biomoléculas y organización celular para formular explicaciones prudentes sobre situaciones del ambiente laboral, indicando evidencias y límites. | Evaluar | Estudio de caso con decisión, justificación, datos faltantes y transferencia. | 35 min |
 
-**Duración total estimada:** 155 minutos, distribuibles en sesiones breves durante las cinco semanas asociadas.
+**Duración total estimada:** 170 minutos, distribuibles en sesiones breves durante las cinco semanas asociadas.
 
 ## Matriz de alineación
 
