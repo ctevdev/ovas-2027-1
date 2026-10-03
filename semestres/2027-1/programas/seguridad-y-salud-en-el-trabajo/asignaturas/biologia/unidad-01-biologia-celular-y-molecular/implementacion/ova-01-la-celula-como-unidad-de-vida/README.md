@@ -17,7 +17,7 @@ El archivo de entrada es `dist/index.html`. El OVA no requiere instalación de d
 
 ## Funcionalidad verificada
 
-- Navegación secuencial entre 14 etapas; una etapa futura solo se habilita al completar correctamente la actual.
+- Navegación libre entre las 14 etapas, sin prerrequisitos ni bloqueos por orden.
 - Progreso accesible calculado exclusivamente con etapas validadas.
 - Retroalimentación para respuestas correctas, incompletas e incorrectas.
 - Activación verdadero/falso, asociación de perspectivas, ordenamiento de niveles, selección de métodos, análisis de error y decisión metodológica.

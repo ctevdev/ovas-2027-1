@@ -24,11 +24,6 @@ try {
   // Continue with an empty progress record when storage is unavailable.
 }
 
-function firstIncompleteStep() {
-  const index = screens.findIndex((_, step) => !completedSteps.has(step));
-  return index === -1 ? screens.length - 1 : index;
-}
-
 function persistProgress() {
   try {
     localStorage.setItem("ova01-completed-steps", JSON.stringify(Array.from(completedSteps).sort((a, b) => a - b)));
@@ -47,8 +42,7 @@ function updateProgress() {
 }
 
 function showStep(step, focus = true) {
-  const highestAvailable = firstIncompleteStep();
-  const bounded = Math.max(0, Math.min(step, highestAvailable, screens.length - 1));
+  const bounded = Math.max(0, Math.min(step, screens.length - 1));
   currentStep = bounded;
 
   screens.forEach((screen, index) => {
@@ -58,8 +52,8 @@ function showStep(step, focus = true) {
   stepButtons.forEach((button, index) => {
     button.classList.toggle("active", index === bounded);
     button.classList.toggle("completed", completedSteps.has(index));
-    button.disabled = index > highestAvailable;
-    button.setAttribute("aria-label", `${button.textContent.trim()}${completedSteps.has(index) ? ", completada" : index > highestAvailable ? ", bloqueada" : ", disponible"}`);
+    button.disabled = false;
+    button.setAttribute("aria-label", `${button.textContent.trim()}${completedSteps.has(index) ? ", completada" : ", pendiente"}`);
     if (index === bounded) button.setAttribute("aria-current", "step");
     else button.removeAttribute("aria-current");
   });
@@ -67,8 +61,8 @@ function showStep(step, focus = true) {
   const humanStep = bounded + 1;
   navStatus.textContent = `${humanStep} / ${screens.length}`;
   previousButton.disabled = bounded === 0;
-  nextButton.disabled = bounded === screens.length - 1 || !completedSteps.has(bounded);
-  nextButton.textContent = bounded === screens.length - 1 ? "Recorrido completado" : completedSteps.has(bounded) ? "Siguiente etapa →" : "Completa la etapa para continuar";
+  nextButton.disabled = bounded === screens.length - 1;
+  nextButton.textContent = bounded === screens.length - 1 ? "Última etapa" : "Siguiente etapa →";
   updateProgress();
 
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -420,7 +414,7 @@ function registerWebMcpTools() {
           throw new Error("La etapa debe ser un número entero entre 1 y 14.");
         }
         showStep(input.section - 1, false);
-        return { section: currentStep + 1, title: screens[currentStep].querySelector("h1, h2")?.textContent ?? "", requestedSection: input.section, locked: currentStep + 1 !== input.section };
+        return { section: currentStep + 1, title: screens[currentStep].querySelector("h1, h2")?.textContent ?? "", requestedSection: input.section };
       }
     }, { signal: lifecycle.signal }),
     context.registerTool({
