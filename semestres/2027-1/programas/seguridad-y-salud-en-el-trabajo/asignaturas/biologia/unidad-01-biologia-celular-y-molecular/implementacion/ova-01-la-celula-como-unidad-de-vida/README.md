@@ -12,7 +12,7 @@ El archivo de entrada es `dist/index.html`. El OVA no requiere instalación de d
 - `dist/styles.css`: diseño adaptable para escritorio, tableta, móvil e impresión.
 - `dist/app.js`: navegación secuencial, validación de actividades, progreso persistente, reinicio, insignia descargable y herramientas WebMCP.
 - `dist/assets/fonts`: familia tipográfica institucional Montserrat y su licencia OFL.
-- `dist/assets/brand`: logos e iconografía institucional para Seguridad y Salud en el Trabajo.
+- `dist/assets/brand`: logos e íconos institucionales separados y ubicados según la función de cada sección.
 - `.openai/hosting.json`: configuración de publicación del sitio estático.
 
 ## Funcionalidad verificada

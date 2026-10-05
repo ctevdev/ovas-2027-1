@@ -175,7 +175,10 @@ p { max-width: 72ch; }
 .reasoning-map div { position: relative; display: grid; grid-template-columns: 3rem 1fr; gap: 0 .85rem; align-items: center; padding: .8rem; background: rgba(255,255,255,.82); border: 1px solid var(--line); border-radius: 14px; }
 .reasoning-map span { z-index: 1; display: grid; place-items: center; width: 3rem; height: 3rem; grid-row: 1 / 3; background: var(--navy-900); color: white; border-radius: 50%; font-weight: 800; }
 .reasoning-map small { color: var(--muted); }
-.program-iconography { display: block; width: min(100%, 600px); height: auto; margin: 1.8rem 0 0 auto; border-radius: 14px; }
+.section-heading { display: flex; align-items: flex-start; gap: 1rem; max-width: 900px; margin-bottom: 1rem; }
+.section-heading img { width: 72px; height: 72px; flex: 0 0 auto; object-fit: contain; }
+.section-heading .kicker { margin: .15rem 0 .35rem; }
+.section-heading h2 { margin-bottom: 0; }
 
 .activity-card {
   display: grid;
@@ -381,6 +384,9 @@ footer summary { cursor: pointer; font-weight: 750; }
   .screen-number { font-size: 3.3rem; }
   h1 { font-size: 2.45rem; }
   h2 { padding-right: 2.5rem; font-size: 2.1rem; }
+  .section-heading { gap: .7rem; }
+  .section-heading img { width: 56px; height: 56px; }
+  .section-heading h2 { padding-right: 1.5rem; }
   .classification label, .assessment label, .branch-grid label { grid-template-columns: 1fr; gap: .45rem; }
   .matrix { grid-template-columns: 1fr; background: transparent; border: 0; }
   .matrix > div { border: 1px solid var(--line); }
