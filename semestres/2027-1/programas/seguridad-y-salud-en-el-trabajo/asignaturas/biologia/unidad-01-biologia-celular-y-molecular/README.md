@@ -1,6 +1,6 @@
 # Unidad 1 Biología celular y molecular
 
-La unidad se ha dividido pedagógicamente en cinco OVA. Los cinco objetos cuentan con implementación HTML5 y paquete descargable. Comparten identidad visual, navegación libre, avance validado mediante actividades e insignia de cumplimiento al 100 %.
+La unidad se ha dividido pedagógicamente en cinco OVA. Los cinco objetos cuentan con implementación HTML5 y paquete descargable. Comparten identidad visual, navegación libre, lecturas contextualizadas, actividades variadas de selección, ordenamiento, relación y clasificación, avance validado e insignia de cumplimiento al 100 %.
 
 ## Estado
 
