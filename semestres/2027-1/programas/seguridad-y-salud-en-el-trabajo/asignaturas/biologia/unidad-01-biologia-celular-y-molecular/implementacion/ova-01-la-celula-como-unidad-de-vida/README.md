@@ -24,7 +24,7 @@ El archivo de entrada es `dist/index.html`. El OVA no requiere instalación de d
 - Autoevaluación con niveles de dominio.
 - Reflexión guardada en el dispositivo cuando el navegador lo permite.
 - Actividad final de transferencia.
-- Insignia de cumplimiento personalizable y descargable al alcanzar el 100 %.
+- Insignia de cumplimiento con cerebro digital dorado, personalizable y descargable únicamente cuando las 14 etapas alcanzan el 100 % validado.
 - Reinicio completo disponible en cualquier momento.
 - Navegación por teclado y alternativa accesible al arrastre.
 - Respeto por la preferencia de movimiento reducido.

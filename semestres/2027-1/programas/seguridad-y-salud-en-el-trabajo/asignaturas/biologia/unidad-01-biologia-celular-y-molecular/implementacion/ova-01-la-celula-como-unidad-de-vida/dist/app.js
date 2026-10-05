@@ -38,7 +38,11 @@ function updateProgress() {
   progressLabel.textContent = `Avance validado: ${percentage} % · ${completed} de ${screens.length} etapas`;
   progressBar.setAttribute("aria-valuenow", String(percentage));
   progressFill.style.width = `${percentage}%`;
-  completionPanel.hidden = completed !== screens.length;
+  completionPanel.hidden = !hasFullCompletion();
+}
+
+function hasFullCompletion() {
+  return completedSteps.size === screens.length && screens.every((_, step) => completedSteps.has(step));
 }
 
 function showStep(step, focus = true) {
@@ -315,17 +319,22 @@ badgeName.addEventListener("input", () => {
 });
 
 document.querySelector("#download-badge").addEventListener("click", () => {
-  if (completedSteps.size !== screens.length) return;
+  if (!hasFullCompletion()) return;
   const recipient = escapeXml(badgeName.value.trim() || "Estudiante");
   const date = new Intl.DateTimeFormat("es-CO", { dateStyle: "long" }).format(new Date());
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
     <rect width="1200" height="1200" rx="72" fill="#f7fbfc"/>
     <path d="M0 0h1200v250H0z" fill="#44388A"/>
-    <circle cx="600" cy="480" r="240" fill="#7FDEE0" stroke="#44388A" stroke-width="28"/>
-    <circle cx="600" cy="480" r="188" fill="#fff" stroke="#EA4B8B" stroke-width="18"/>
-    <text x="600" y="410" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="54" font-weight="700" fill="#44388A">INSIGNIA</text>
-    <text x="600" y="535" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="118" font-weight="800" fill="#44388A">100%</text>
-    <text x="600" y="605" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="34" font-weight="700" fill="#44388A">OVA COMPLETADO</text>
+    <circle cx="600" cy="480" r="240" fill="#44388A" stroke="#8C6A13" stroke-width="36"/>
+    <circle cx="600" cy="480" r="210" fill="#5A4B28" stroke="#D4AF37" stroke-width="18"/>
+    <g opacity=".58" fill="none" stroke="#F4D76B" stroke-linecap="round" stroke-linejoin="round">
+      <path stroke-width="14" d="M593 300c-48-45-128-17-130 48-60 8-88 78-50 125-38 45-15 117 43 132 10 62 85 87 133 44 40 48 120 35 140-25 62-3 107-62 85-118 43-38 30-112-23-136 8-68-70-108-125-68-22-38-72-50-115-28Z"/>
+      <path stroke-width="10" d="M593 300v349M465 350h72v70h56M413 473h92v50h88M456 605h75v-63h62M730 350h-72v72h-65M815 478h-95v48H593M730 624h-70v-74h-67"/>
+      <g fill="#F4D76B" stroke="#8C6A13" stroke-width="5"><circle cx="465" cy="350" r="12"/><circle cx="413" cy="473" r="12"/><circle cx="456" cy="605" r="12"/><circle cx="730" cy="350" r="12"/><circle cx="815" cy="478" r="12"/><circle cx="730" cy="624" r="12"/></g>
+    </g>
+    <text x="600" y="410" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="54" font-weight="700" fill="#FFF7CF">INSIGNIA</text>
+    <text x="600" y="535" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="118" font-weight="800" fill="#FFFFFF" stroke="#6A5210" stroke-width="3" paint-order="stroke">100%</text>
+    <text x="600" y="605" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="34" font-weight="700" fill="#FFF7CF">OVA COMPLETADO</text>
     <text x="600" y="815" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="52" font-weight="800" fill="#26233F">La célula como unidad de vida</text>
     <text x="600" y="900" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="38" fill="#44388A">Otorgada a ${recipient}</text>
     <text x="600" y="965" text-anchor="middle" font-family="Montserrat,Arial,sans-serif" font-size="28" fill="#5a5672">${escapeXml(date)}</text>
@@ -424,7 +433,7 @@ function registerWebMcpTools() {
       inputSchema: { type: "object", properties: {}, additionalProperties: false },
       annotations: { readOnlyHint: true, untrustedContentHint: false },
       execute() {
-        return { currentSection: currentStep + 1, totalSections: screens.length, completedSections: Array.from(completedSteps, (step) => step + 1), percentage: Math.round((completedSteps.size / screens.length) * 100), badgeUnlocked: completedSteps.size === screens.length };
+        return { currentSection: currentStep + 1, totalSections: screens.length, completedSections: Array.from(completedSteps, (step) => step + 1), percentage: Math.round((completedSteps.size / screens.length) * 100), badgeUnlocked: hasFullCompletion() };
       }
     }, { signal: lifecycle.signal })
   ];

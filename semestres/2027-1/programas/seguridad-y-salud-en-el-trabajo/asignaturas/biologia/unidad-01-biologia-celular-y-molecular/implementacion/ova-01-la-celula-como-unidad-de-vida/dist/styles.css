@@ -340,9 +340,13 @@ mark { padding: .05rem .25rem; background: var(--orange-200); color: var(--navy-
 .stage-check .feedback { grid-column: 1 / -1; }
 .completion { margin-top: 1.8rem; }
 .achievement { display: grid; grid-template-columns: 270px minmax(0, 1fr); align-items: center; gap: clamp(1.5rem, 4vw, 3rem); padding: clamp(1.4rem, 4vw, 2.5rem); overflow: hidden; background: linear-gradient(135deg, #f0eef9, #e6f9fa); border: 2px solid var(--teal-400); border-radius: 24px; }
-.badge-medallion { display: grid; place-items: center; align-content: center; width: 250px; height: 250px; justify-self: center; color: var(--navy-900); background: white; border: 18px solid var(--teal-400); outline: 10px solid var(--navy-900); border-radius: 50%; box-shadow: 0 18px 40px rgba(68,56,138,.18); text-align: center; }
-.badge-medallion span, .badge-medallion small { font-size: .78rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
-.badge-medallion strong { font-size: 4rem; line-height: 1.1; }
+.badge-medallion { position: relative; isolation: isolate; display: grid; place-items: center; align-content: center; width: 250px; height: 250px; justify-self: center; overflow: hidden; color: white; background: radial-gradient(circle at 50% 42%, #6a5a22 0%, #44388a 70%); border: 14px solid #d4af37; outline: 7px solid #8c6a13; border-radius: 50%; box-shadow: 0 18px 40px rgba(68,56,138,.24), inset 0 0 0 5px rgba(255,255,255,.35); text-align: center; }
+.badge-brain { position: absolute; z-index: 0; inset: 20px; width: calc(100% - 40px); height: calc(100% - 40px); color: #f4d76b; opacity: .62; }
+.badge-brain path { fill: none; stroke: currentColor; stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; }
+.badge-brain .brain-outline { fill: rgba(212,175,55,.18); stroke-width: 7; }
+.badge-brain circle { fill: #f4d76b; stroke: #8c6a13; stroke-width: 2; }
+.badge-medallion span, .badge-medallion small { position: relative; z-index: 1; padding: .12rem .35rem; background: rgba(38,35,63,.62); border-radius: 5px; font-size: .72rem; font-weight: 850; letter-spacing: .1em; text-transform: uppercase; }
+.badge-medallion strong { position: relative; z-index: 1; color: #fff7cf; text-shadow: 0 3px 0 #6a5210, 0 0 14px rgba(0,0,0,.55); font-size: 4rem; line-height: 1.1; }
 .achievement-copy h3 { margin-bottom: .55rem; font-size: clamp(1.45rem, 3vw, 2.2rem); }
 .achievement-copy p { margin-top: .4rem; }
 .achievement-copy label { display: block; max-width: 520px; margin-top: 1rem; }
