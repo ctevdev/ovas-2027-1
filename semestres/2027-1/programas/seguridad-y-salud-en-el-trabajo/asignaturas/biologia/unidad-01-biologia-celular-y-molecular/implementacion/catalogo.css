@@ -1,0 +1,58 @@
+@font-face {
+  font-family: Montserrat;
+  src: url("ova-01-la-celula-como-unidad-de-vida/dist/assets/fonts/Montserrat-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+
+:root {
+  --purple: #44388a;
+  --navy: #26233f;
+  --teal: #29939a;
+  --aqua: #7fdee0;
+  --pink: #ea4b8b;
+  --paper: #f7f7fb;
+}
+
+body {
+  margin: 0;
+  color: var(--navy);
+  background: var(--paper);
+  font: 400 1rem/1.65 Montserrat, Arial, sans-serif;
+}
+
+.shell { width: min(1160px, calc(100% - 2rem)); margin-inline: auto; }
+.skip-link { position: fixed; z-index: 10; top: .5rem; left: .5rem; padding: .7rem 1rem; color: white; background: var(--navy); transform: translateY(-150%); }
+.skip-link:focus { transform: none; }
+.hero { padding: clamp(2rem, 6vw, 4.5rem) 0; color: white; background: linear-gradient(125deg, var(--purple), #6554bd); }
+.hero-grid { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
+.hero img { width: 100%; height: auto; padding: .65rem; background: white; border-radius: 16px; }
+.hero p { max-width: 76ch; }
+.eyebrow { margin: 0 0 .35rem; font-size: .78rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
+h1, h2 { line-height: 1.2; }
+h1 { margin: .2rem 0 .7rem; font-size: clamp(2rem, 5vw, 3.7rem); }
+h2 { margin: .2rem 0 .65rem; font-size: clamp(1.3rem, 2.4vw, 1.75rem); }
+.orientation { display: grid; grid-template-columns: 1.25fr .75fr; gap: 2rem; margin: 2rem 0; padding: clamp(1.3rem, 4vw, 2.2rem); background: white; border-left: 8px solid var(--pink); border-radius: 18px; box-shadow: 0 8px 28px #30265f12; }
+.orientation p { max-width: 76ch; }
+.orientation ul { margin: 0; padding: 1rem 1rem 1rem 2rem; background: #eefafa; border-radius: 12px; }
+.ova-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.2rem; margin: 2rem 0 3rem; }
+.ova-card { position: relative; display: flex; flex-direction: column; min-height: 320px; padding: 1.6rem; overflow: hidden; background: white; border: 1px solid #d8d5e8; border-radius: 18px; box-shadow: 0 8px 24px #30265f0d; }
+.ova-card::before { content: ""; position: absolute; inset: 0 auto 0 0; width: 7px; background: var(--teal); }
+.ova-card.featured { grid-column: 1 / -1; min-height: 280px; background: linear-gradient(135deg, white, #edfafa); }
+.number { position: absolute; top: 1rem; right: 1.2rem; color: #ded9f4; font-size: 4rem; font-weight: 900; line-height: 1; }
+.ova-card h2, .ova-card p { position: relative; max-width: 70ch; }
+.ova-card > p:not(.eyebrow) { flex-grow: 1; }
+.actions { position: relative; display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1rem; }
+.actions a { padding: .7rem 1rem; color: var(--purple); border: 2px solid var(--purple); border-radius: 9px; font-weight: 800; text-decoration: none; }
+.actions a.primary { color: white; background: var(--purple); }
+.actions a:hover { box-shadow: 0 0 0 3px #ea4b8b55; }
+a:focus-visible { outline: 3px solid var(--pink); outline-offset: 3px; }
+footer { padding: 1.5rem 0; color: white; background: var(--navy); }
+
+@media (max-width: 720px) {
+  .hero-grid, .orientation, .ova-grid { grid-template-columns: 1fr; }
+  .hero img { width: 180px; }
+  .ova-card.featured { grid-column: auto; }
+}

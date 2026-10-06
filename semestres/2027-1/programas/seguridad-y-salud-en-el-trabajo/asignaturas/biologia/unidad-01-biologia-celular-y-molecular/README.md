@@ -19,10 +19,11 @@ La unidad se ha dividido pedagógicamente en cinco OVA. Los cinco objetos cuenta
 - `diseno/02_guion_ova_01.md`: guion instruccional completo del primer OVA.
 - `diseno/build_ovas_02_05.mjs`: fuente estructurada para generar y mantener las OVA 02 a 05.
 - `implementacion`: experiencias HTML5 interactivas de las cinco OVA.
+- `implementacion/index.html`: portada general para acceder a la ruta completa y descargar cada paquete.
 - `publicables`: paquetes finales listos para distribución.
 
 ## Vista local
 
-Abra el archivo `dist/index.html` de cualquiera de las carpetas OVA en un navegador moderno. Para probarlo mediante un servidor local, publique el contenido de la carpeta `dist` correspondiente.
+Abra `implementacion/index.html` para consultar el catálogo completo o el archivo `dist/index.html` de cualquiera de las carpetas OVA. Para probar una OVA mediante un servidor local, publique el contenido de su carpeta `dist`.
 
 
