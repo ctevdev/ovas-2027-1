@@ -27,8 +27,8 @@ body {
 .skip-link { position: fixed; z-index: 10; top: .5rem; left: .5rem; padding: .7rem 1rem; color: white; background: var(--navy); transform: translateY(-150%); }
 .skip-link:focus { transform: none; }
 .hero { padding: clamp(2rem, 6vw, 4.5rem) 0; color: white; background: linear-gradient(125deg, var(--purple), #6554bd); }
-.hero-grid { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
-.hero img { width: 100%; height: auto; padding: .65rem; background: white; border-radius: 16px; }
+.hero-grid { display: grid; grid-template-columns: minmax(280px, 350px) minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
+.hero img { display: block; width: 100%; height: 126px; padding: 1rem 1.2rem; object-fit: contain; object-position: center; background: #f6f6f6; border-radius: 16px; }
 .hero p { max-width: 76ch; }
 .unit-download { display: inline-flex; margin-top: .6rem; padding: .75rem 1rem; color: var(--purple); background: white; border: 2px solid white; border-radius: 10px; font-weight: 850; text-decoration: none; }
 .unit-download:hover { color: white; background: transparent; }
@@ -55,6 +55,6 @@ footer { padding: 1.5rem 0; color: white; background: var(--navy); }
 
 @media (max-width: 720px) {
   .hero-grid, .orientation, .ova-grid { grid-template-columns: 1fr; }
-  .hero img { width: 180px; }
+  .hero img { width: min(100%, 340px); height: 112px; }
   .ova-card.featured { grid-column: auto; }
 }
