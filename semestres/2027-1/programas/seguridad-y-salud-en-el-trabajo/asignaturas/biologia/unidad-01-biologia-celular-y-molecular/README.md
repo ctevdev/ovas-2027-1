@@ -21,6 +21,7 @@ La unidad se ha dividido pedagógicamente en cinco OVA. Los cinco objetos cuenta
 - `implementacion`: experiencias HTML5 interactivas de las cinco OVA.
 - `implementacion/index.html`: portada general para acceder a la ruta completa y descargar cada paquete.
 - `publicables`: paquetes finales listos para distribución.
+- `publicables/Unidad-01-Biologia-celular-y-molecular-completa.zip`: descarga integral con catálogo, cinco OVA y paquetes individuales.
 
 ## Vista local
 

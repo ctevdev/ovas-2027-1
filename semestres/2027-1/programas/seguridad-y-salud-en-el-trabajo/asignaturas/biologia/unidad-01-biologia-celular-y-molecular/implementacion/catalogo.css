@@ -30,6 +30,8 @@ body {
 .hero-grid { display: grid; grid-template-columns: 210px minmax(0, 1fr); gap: clamp(1.5rem, 5vw, 4rem); align-items: center; }
 .hero img { width: 100%; height: auto; padding: .65rem; background: white; border-radius: 16px; }
 .hero p { max-width: 76ch; }
+.unit-download { display: inline-flex; margin-top: .6rem; padding: .75rem 1rem; color: var(--purple); background: white; border: 2px solid white; border-radius: 10px; font-weight: 850; text-decoration: none; }
+.unit-download:hover { color: white; background: transparent; }
 .eyebrow { margin: 0 0 .35rem; font-size: .78rem; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; }
 h1, h2 { line-height: 1.2; }
 h1 { margin: .2rem 0 .7rem; font-size: clamp(2rem, 5vw, 3.7rem); }
