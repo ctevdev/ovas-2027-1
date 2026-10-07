@@ -16,7 +16,11 @@
         <p class="eyebrow">Programa Seguridad y Salud en el Trabajo a Distancia · Biología</p>
         <h1>Unidad 1 · Biología celular y molecular</h1>
         <p>Ruta integrada de cinco Objetos Virtuales de Aprendizaje para comprender la célula, relacionar biomoléculas y aplicar el razonamiento basado en evidencia al contexto laboral.</p>
-        <a class="unit-download" href="../publicables/Unidad-01-Biologia-celular-y-molecular-completa.zip" download>Descargar la unidad completa</a>
+        <div class="unit-actions">
+          <a class="unit-download" href="../publicables/Unidad-01-Biologia-celular-y-molecular-completa.zip" download>Descargar la unidad completa</a>
+          <button class="fullscreen-button" id="fullscreen-toggle" type="button" aria-pressed="false"><span aria-hidden="true">⛶</span> <span id="fullscreen-label">Pantalla completa</span></button>
+        </div>
+        <p id="fullscreen-status" class="sr-only" aria-live="polite"></p>
       </div>
     </div>
   </header>
@@ -79,5 +83,6 @@
   </main>
 
   <footer><div class="shell">Universidad de Cartagena · Centro Tecnológico para la Formación Virtual y a Distancia</div></footer>
+  <script src="catalogo.js"></script>
 </body>
 </html>
