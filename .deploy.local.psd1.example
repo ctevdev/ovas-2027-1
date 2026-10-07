@@ -1,0 +1,7 @@
+@{
+    Server       = 'servidor.ejemplo.edu.co'
+    User         = 'usuario_despliegue'
+    RemoteRoot   = '/home/usuario/public_html'
+    IdentityFile = 'C:\llaves\ovas_ed25519'
+    Port         = 22
+}

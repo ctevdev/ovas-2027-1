@@ -2,7 +2,8 @@
 _qa/
 
 # Herramientas auxiliares locales
-tools/
+tools/*
+!tools/publicar-ovas-ssh.ps1
 
 # Archivos temporales del sistema y editores
 Thumbs.db
@@ -14,4 +15,6 @@ Thumbs.db
 node_modules/
 /dist/
 _site_publish/
+/tmp/
+.deploy.local.psd1
 

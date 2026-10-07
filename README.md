@@ -6,6 +6,7 @@ Este repositorio organiza los Objetos Virtuales de Aprendizaje por período acad
 
 - [Semestre 2027-1](semestres/2027-1/README.md)
 - [Convenciones del repositorio](docs/convenciones.md)
+- [Publicación local mediante llave SSH](docs/publicacion-local-ssh.md)
 
 ## Estructura
 
@@ -24,4 +25,6 @@ semestres/
 ```
 
 La carpeta `publicables` se reserva para artefactos listos para distribución, como paquetes SCORM, archivos H5P o versiones finales comprimidas. Los archivos de trabajo y las fuentes editables deben permanecer en sus carpetas correspondientes.
+
+Las OVA pueden publicarse desde el equipo local mediante una llave SSH, conservando la estructura del repositorio, con el procedimiento documentado en `docs/publicacion-local-ssh.md`.
 
