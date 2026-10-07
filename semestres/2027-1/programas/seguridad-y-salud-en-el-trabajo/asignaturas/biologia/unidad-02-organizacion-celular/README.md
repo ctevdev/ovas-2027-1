@@ -33,3 +33,5 @@ Abra `implementacion/index.html` para iniciar la ruta local.
 ## Descargas
 
 En `publicables` se encuentran los seis paquetes individuales y `Unidad-02-Organizacion-celular-completa.zip`, que reúne el catálogo y todas las secciones.
+
+Para desplegar la unidad conservando exactamente la ruta del repositorio, utilice `Unidad-02-estructura-servidor.zip` y siga `INSTRUCCIONES_CARGA_SERVIDOR.md`.
