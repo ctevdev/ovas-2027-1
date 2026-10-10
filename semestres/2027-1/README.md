@@ -3,4 +3,5 @@
 ## Programas
 
 - [Seguridad y Salud en el Trabajo](programas/seguridad-y-salud-en-el-trabajo/README.md)
+- [Técnica Profesional en Operación Turística](programas/tecnica-profesional-en-operacion-turistica/README.md)
 
