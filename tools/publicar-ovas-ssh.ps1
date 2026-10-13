@@ -60,6 +60,17 @@ if ($relativeSource.StartsWith('../') -or $relativeSource -eq '..') {
     throw 'SourcePath debe estar dentro del repositorio.'
 }
 
+$downloadValidator = Join-Path $PSScriptRoot 'validar-descargas-ova.ps1'
+if (-not (Test-Path -LiteralPath $downloadValidator -PathType Leaf)) {
+    throw "No se encontró el validador requerido: $downloadValidator"
+}
+
+Write-Host "Validando descargas de las OVA incluidas en: $relativeSource"
+& $downloadValidator -SourcePath $relativeSource
+if ($LASTEXITCODE -ne 0) {
+    throw 'La validación de descargas falló. No se realizará la publicación.'
+}
+
 foreach ($command in @('tar.exe', 'scp.exe', 'ssh.exe')) {
     if (-not (Get-Command $command -ErrorAction SilentlyContinue)) {
         throw "No se encontró $command. Instale o habilite OpenSSH en Windows."

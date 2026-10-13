@@ -43,3 +43,15 @@ Los nombres de los paquetes finales deben incluir período, programa, asignatura
 
 `2027-1-sst-biologia-u01-ova01-scorm12.zip`
 
+## Regla obligatoria para las descargas
+
+Cuando el catálogo de una unidad enlace archivos ZIP desde `../publicables/`, deben cumplirse todas estas condiciones antes de dar la unidad por terminada:
+
+- Cada enlace debe apuntar a un archivo real dentro de `publicables`.
+- Cada ZIP debe poder abrirse y contener al menos una entrada.
+- Cuando se genere un paquete `*estructura-servidor.zip`, debe incluir todos los ZIP enlazados por el catálogo, conservando la ruta completa desde `semestres`.
+- Cuando exista, el paquete de servidor no debe contener una copia de sí mismo, para evitar anidamiento recursivo y crecimiento innecesario.
+- La validación debe finalizar sin errores mediante `tools/validar-descargas-ova.ps1`.
+
+Si se requiere un paquete de servidor, se genera al final, después de crear los paquetes de cada sección y el paquete completo de la unidad. Si se modifica cualquier descargable, también debe regenerarse el paquete de servidor.
+

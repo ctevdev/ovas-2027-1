@@ -4,6 +4,7 @@ _qa/
 # Herramientas auxiliares locales
 tools/*
 !tools/publicar-ovas-ssh.ps1
+!tools/validar-descargas-ova.ps1
 
 # Archivos temporales del sistema y editores
 Thumbs.db

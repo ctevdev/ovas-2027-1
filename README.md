@@ -28,3 +28,5 @@ La carpeta `publicables` se reserva para artefactos listos para distribución, c
 
 Las OVA pueden publicarse desde el equipo local mediante una llave SSH, conservando la estructura del repositorio, con el procedimiento documentado en `docs/publicacion-local-ssh.md`.
 
+Antes de publicar, el repositorio valida que cada enlace de descarga del catálogo apunte a un ZIP existente y que todos esos archivos estén incluidos en el paquete de servidor. Esta comprobación también puede ejecutarse manualmente con `tools/validar-descargas-ova.ps1`.
+

@@ -40,6 +40,15 @@ Ejecute desde la raíz del repositorio:
 .\tools\publicar-ovas-ssh.ps1
 ```
 
+Antes de crear el archivo temporal, el script ejecuta la validación de descargas. La publicación se detiene si un catálogo enlaza un ZIP inexistente o corrupto. Cuando la unidad contiene un paquete `*estructura-servidor.zip`, también comprueba que ese paquete incluya todas las descargas y no se incluya a sí mismo.
+
+La validación también puede ejecutarse sin publicar:
+
+```powershell
+.\tools\validar-descargas-ova.ps1 `
+  -SourcePath "semestres/2027-1/programas"
+```
+
 El servidor recibirá:
 
 ```text
