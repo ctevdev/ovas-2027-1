@@ -17,6 +17,7 @@ Antes de cada entrega se debe mostrar al usuario una lista resumida con estado *
 - [ ] Variedad de selección única, selección múltiple, relación y ordenamiento.
 - [ ] Reinicio funcional sin bloquear la navegación.
 - [ ] Una sola insignia por unidad, nunca una insignia por sección.
+- [ ] Las secciones no contienen imágenes, medallones, textos, botones ni estilos CSS de insignia; toda su presentación y descarga existe exclusivamente en el catálogo de la unidad.
 - [ ] Insignia oculta hasta completar correctamente todas las actividades de todas las secciones de la unidad.
 - [ ] Segunda verificación lógica antes de permitir la descarga de la insignia.
 - [ ] Interfaz, insignia, botones, iconografía y acentos visuales personalizados con la paleta del programa.

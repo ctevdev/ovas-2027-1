@@ -45,7 +45,7 @@ Programa: Administración Agroindustrial
 - [x] El avance se registra únicamente cuando la respuesta coincide exactamente con la solución definida.
 - [x] Las respuestas incorrectas permiten revisar e intentar nuevamente.
 - [x] El reinicio elimina el progreso guardado, limpia respuestas y devuelve a la primera etapa.
-- [x] Ninguna sección genera o descarga una insignia individual.
+- [x] Ninguna sección contiene imágenes, medallones, textos, botones, funciones ni estilos CSS de insignia.
 - [x] El catálogo consolida el avance de las seis secciones: 48 actividades por unidad.
 - [x] Existe una sola insignia por unidad; inicia oculta y solo aparece cuando las seis secciones registran 8 de 8 actividades correctas.
 - [x] La función de descarga contiene una segunda verificación de las seis secciones completas; si la condición no se cumple, no genera ni descarga el archivo.
@@ -54,10 +54,10 @@ Programa: Administración Agroindustrial
 
 ## 5. Interfaz y uniformidad visual
 
-- [x] Se recuperó el patrón visual de las OVAs anteriores: cabecera institucional, propósito, panel de avance, línea de tiempo, pantalla de etapa, navegación, insignia y referencias.
+- [x] Las secciones recuperan el patrón visual aprobado: cabecera institucional, propósito, panel de avance, línea de tiempo, pantalla de etapa, navegación y referencias; la insignia aparece únicamente en el catálogo de la unidad.
 - [x] La línea de tiempo presenta ocho posiciones con estados actual, pendiente y completado.
 - [x] Todos los botones usan el mismo sistema de tamaño, tipografía, radio, color y estado de foco.
-- [x] Los botones mantienen textos uniformes: Volver al catálogo, Reiniciar sección, Validar actividad, Etapa anterior, Etapa siguiente y Descargar insignia SVG.
+- [x] Los botones de las secciones mantienen textos uniformes: Volver al catálogo, Reiniciar sección, Validar actividad, Etapa anterior y Etapa siguiente; el único botón de insignia está en el catálogo.
 - [x] Los catálogos mantienen Descargar la unidad completa, Pantalla completa, Abrir sección y Descargar ZIP.
 - [x] Se usan Montserrat, logotipo institucional e iconografía individual, no una tira de iconos apilada.
 - [x] La interfaz y la insignia están personalizadas con la paleta verde y dorada de Administración Agroindustrial, con contraste, espacio en blanco y longitud de línea controlada.
