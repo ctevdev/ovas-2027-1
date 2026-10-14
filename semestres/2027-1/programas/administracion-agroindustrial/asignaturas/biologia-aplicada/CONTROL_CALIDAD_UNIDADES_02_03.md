@@ -38,16 +38,18 @@ Programa: Administración Agroindustrial
 - [x] Ordenamiento de procesos: 25 actividades.
 - [x] Total validado: 96 actividades.
 
-## 4. Navegación, avance e insignia
+## 4. Navegación, avance e insignia única de unidad
 
 - [x] Las ocho etapas pueden abrirse en cualquier orden y no funcionan como prerrequisitos.
 - [x] Visitar una etapa no incrementa el avance.
 - [x] El avance se registra únicamente cuando la respuesta coincide exactamente con la solución definida.
 - [x] Las respuestas incorrectas permiten revisar e intentar nuevamente.
 - [x] El reinicio elimina el progreso guardado, limpia respuestas y devuelve a la primera etapa.
-- [x] La insignia inicia oculta y solo aparece cuando las ocho actividades están validadas.
-- [x] La función de descarga contiene una segunda verificación del 100 %; si la condición no se cumple, no genera ni descarga el archivo.
-- [x] La insignia conserva el cerebro digital dorado, el valor 100 %, el nombre de la sección y el nombre del estudiante.
+- [x] Ninguna sección genera o descarga una insignia individual.
+- [x] El catálogo consolida el avance de las seis secciones: 48 actividades por unidad.
+- [x] Existe una sola insignia por unidad; inicia oculta y solo aparece cuando las seis secciones registran 8 de 8 actividades correctas.
+- [x] La función de descarga contiene una segunda verificación de las seis secciones completas; si la condición no se cumple, no genera ni descarga el archivo.
+- [x] La insignia conserva el cerebro digital dorado, el valor 100 %, el nombre de la unidad, el programa y el nombre del estudiante.
 - [x] El progreso persiste localmente por sección sin mezclar resultados entre OVAs.
 
 ## 5. Interfaz y uniformidad visual
@@ -58,7 +60,7 @@ Programa: Administración Agroindustrial
 - [x] Los botones mantienen textos uniformes: Volver al catálogo, Reiniciar sección, Validar actividad, Etapa anterior, Etapa siguiente y Descargar insignia SVG.
 - [x] Los catálogos mantienen Descargar la unidad completa, Pantalla completa, Abrir sección y Descargar ZIP.
 - [x] Se usan Montserrat, logotipo institucional e iconografía individual, no una tira de iconos apilada.
-- [x] Se mantiene la paleta verde de Administración Agroindustrial con contraste, espacio en blanco y longitud de línea controlada.
+- [x] La interfaz y la insignia están personalizadas con la paleta verde y dorada de Administración Agroindustrial, con contraste, espacio en blanco y longitud de línea controlada.
 - [x] La composición responde a escritorio, tableta y móvil mediante puntos de ruptura de 760 y 420 píxeles.
 - [x] Los controles interactivos tienen foco visible y etiquetas accesibles.
 
@@ -86,6 +88,13 @@ Programa: Administración Agroindustrial
 - [x] Todas las actividades tienen solución válida y controles completos.
 - [x] Resultado del auditor interno: cero incumplimientos.
 - [x] Resultado del validador de descargas: 2 catálogos y 14 descargas correctas.
+
+## 9. Control obligatorio antes de cada entrega
+
+- [x] La lista de chequeo debe ejecutarse nuevamente después de cualquier modificación.
+- [x] Antes de cada salida se debe mostrar al usuario un resumen con estado **CUMPLE** o **NO CUMPLE** para cada grupo de criterios.
+- [x] Si existe un criterio pendiente, la entrega no puede declararse aprobada.
+- [x] El paquete para servidor solo puede regenerarse después de obtener cero incumplimientos.
 
 ## Criterio de cierre
 

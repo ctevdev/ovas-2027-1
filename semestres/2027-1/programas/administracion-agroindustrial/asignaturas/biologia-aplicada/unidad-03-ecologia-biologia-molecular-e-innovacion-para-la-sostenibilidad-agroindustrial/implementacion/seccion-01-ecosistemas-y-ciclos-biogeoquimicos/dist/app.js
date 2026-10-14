@@ -38,14 +38,13 @@ const storageKey=document.body.dataset.sectionId+'-completed-v2';
 let current=0;
 let completed=new Set();
 try{completed=new Set(JSON.parse(localStorage.getItem(storageKey)||'[]').filter(value=>Number.isInteger(value)&&value>=0&&value<total));}catch{}
-const isComplete=()=>completed.size===total&&screenList.every((_,index)=>completed.has(index));
 function update(){
   const percentage=Math.round(completed.size/total*100);
   $('#progress-label').textContent=`${percentage} % · ${completed.size} de ${total} actividades`;
   $('#progress-fill').style.width=percentage+'%';
   $('.progress-track').setAttribute('aria-valuenow',percentage);
   stageButtons.forEach((button,index)=>button.classList.toggle('is-complete',completed.has(index)));
-  $('#completion').hidden=!isComplete();
+  window.parent.postMessage({type:'ova-progress',sectionId:document.body.dataset.sectionId,completed:completed.size,total},'*');
 }
 function show(index,focus=true){
   current=(index+total)%total;
@@ -74,13 +73,6 @@ document.querySelectorAll('.activity').forEach((form,index)=>form.addEventListen
 $('#restart').addEventListener('click',()=>{
   if(!confirm('¿Deseas borrar el avance validado y reiniciar esta sección?'))return;
   completed.clear();localStorage.removeItem(storageKey);document.querySelectorAll('.activity').forEach(form=>{form.reset();const feedback=form.querySelector('.feedback');feedback.textContent='';feedback.className='feedback';});update();show(0);
-});
-$('#download-badge').addEventListener('click',()=>{
-  if(!isComplete())return;
-  const name=esc($('#student-name').value.trim()||'Estudiante');
-  const title=esc(data.title);
-  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200"><rect width="1200" height="1200" rx="70" fill="#f6faf4"/><rect width="1200" height="250" fill="#173f32"/><circle cx="600" cy="500" r="245" fill="#d4af37" stroke="#8f6810" stroke-width="32"/><g opacity=".48" fill="none" stroke="#5d4105" stroke-width="14"><path d="M585 315c-70-45-135 8-120 75-70 28-70 115-12 145-18 75 65 125 120 75 45 60 145 25 140-55 70-25 70-120 5-145 10-70-75-110-125-60-5-15-5-20-8-35Z"/><path d="M590 315v300M470 390h80v60h40M450 500h100v55h40M710 390h-80v60h-40M750 500h-100v55h-60"/></g><text x="600" y="455" text-anchor="middle" font-family="Arial" font-weight="800" font-size="55">INSIGNIA</text><text x="600" y="580" text-anchor="middle" font-family="Arial" font-weight="900" font-size="120">100%</text><text x="600" y="650" text-anchor="middle" font-family="Arial" font-weight="800" font-size="30">CUMPLIMIENTO VALIDADO</text><text x="600" y="835" text-anchor="middle" font-family="Arial" font-weight="800" font-size="38">${title}</text><text x="600" y="925" text-anchor="middle" font-family="Arial" font-size="38">Otorgada a ${name}</text><text x="600" y="1000" text-anchor="middle" font-family="Arial" font-size="27">Universidad de Cartagena · Biología Aplicada</text></svg>`;
-  const blob=new Blob([svg],{type:'image/svg+xml'});const link=document.createElement('a');link.href=URL.createObjectURL(blob);link.download=document.body.dataset.sectionId+'-insignia.svg';link.click();setTimeout(()=>URL.revokeObjectURL(link.href),1000);
 });
 $('.catalog-link').addEventListener('click',event=>{if(event.currentTarget.id==='restart'||window.parent===window)return;event.preventDefault();window.parent.postMessage({type:'ova-back-catalog'},'*');});
 update();show(0,false);
