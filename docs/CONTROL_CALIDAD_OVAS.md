@@ -14,6 +14,8 @@ Antes de cada entrega se debe mostrar al usuario una lista resumida con estado *
 - [ ] Navegación libre entre etapas y secciones.
 - [ ] Avance únicamente después de respuestas correctas.
 - [ ] Distractores plausibles, homogéneos y sin opciones absurdas o evidentemente falsas.
+- [ ] Las posiciones visibles de respuestas, relaciones y secuencias se barajan de forma estable por actividad; no existe una posición correcta repetida o un orden que revele la solución.
+- [ ] Cada actividad declara y evidencia un nivel de la taxonomía de Bloom coherente con el resultado de aprendizaje del proyecto docente; la progresión debe avanzar desde comprensión hacia aplicación, análisis y evaluación.
 - [ ] Variedad de selección única, selección múltiple, relación y ordenamiento.
 - [ ] Reinicio funcional sin bloquear la navegación.
 - [ ] Una sola insignia por unidad, nunca una insignia por sección.

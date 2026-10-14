@@ -37,6 +37,11 @@ Programa: Administración Agroindustrial
 - [x] Relación de conceptos: 13 actividades.
 - [x] Ordenamiento de procesos: 25 actividades.
 - [x] Total validado: 96 actividades.
+- [x] Las opciones de selección, las relaciones y los elementos de ordenamiento se presentan en órdenes variados y estables por actividad, sin alterar la clave de validación.
+- [x] Las 34 respuestas de selección única se distribuyen entre las tres posiciones visibles: 13 en la primera, 12 en la segunda y 9 en la tercera.
+- [x] Se validaron 4 patrones de selección múltiple, 24 patrones de ordenamiento y 8 patrones de relación.
+- [x] La demanda cognitiva se clasifica según la tarea realmente solicitada: 22 actividades C2 Comprender, 23 C3 Aplicar, 32 C4 Analizar y 19 C5 Evaluar.
+- [x] El 77 % de las actividades exige aplicación o un nivel superior y el 53 % exige análisis o evaluación, en coherencia con los RAC 1 y 2 del proyecto docente.
 
 ## 4. Navegación, avance e insignia única de unidad
 

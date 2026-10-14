@@ -10,6 +10,31 @@ $('#references-list').innerHTML=data.references.map(item=>`<li>${esc(item)}</li>
 const iconFor=index=>['icon-informacion.png','icon-recursos.png','icon-actividades.png','icon-interaccion.png','icon-experiencias.png'][index%5];
 const screens=$('#screens');
 const nav=$('#stage-nav');
+function bloomFor(activity,index){
+  const question=activity.question.toLowerCase();
+  if(activity.type==='match')return {level:'C2',label:'Comprender'};
+  if(activity.type==='order')return index>=7?{level:'C4',label:'Analizar'}:{level:'C3',label:'Aplicar'};
+  if(activity.type==='multi')return index>=6||/evidenc|criter|decisiones|precauciones|evaluación/.test(question)?{level:'C4',label:'Analizar'}:{level:'C3',label:'Aplicar'};
+  if(/más sól|mejor|más coherente|prudente|conviene|responsable|insuficiente|criterio debe|propuesta|decisión|priorizar|alternativa|uso correcto|indicador está mejor|participación aporta más|qué acción es correcta|cuál afirmación es prudente/.test(question))return {level:'C5',label:'Evaluar'};
+  if(index>=4||/caso|lotes|muestra|patrón|inferencia|diagnóstico|comparación/.test(question))return {level:'C4',label:'Analizar'};
+  return {level:'C2',label:'Comprender'};
+}
+function hashSeed(text){
+  let hash=2166136261;
+  for(const character of text){hash^=character.charCodeAt(0);hash=Math.imul(hash,16777619);}
+  return hash>>>0;
+}
+function shuffle(items,salt){
+  const result=[...items];
+  let state=hashSeed(salt);
+  for(let index=result.length-1;index>0;index--){
+    state^=state<<13;state^=state>>>17;state^=state<<5;state>>>=0;
+    const target=state%(index+1);
+    [result[index],result[target]]=[result[target],result[index]];
+  }
+  if(result.length>1&&result.every((item,index)=>item===items[index]))result.push(result.shift());
+  return result;
+}
 function visualHtml(stage){
   if(!stage.visual?.items?.length)return '';
   return `<figure class="concept-visual" aria-label="${esc(stage.visual.label)}"><figcaption>${esc(stage.visual.label)}</figcaption><div>${stage.visual.items.map((item,index)=>`${index?'<b aria-hidden="true">→</b>':''}<span>${esc(item)}</span>`).join('')}</div></figure>`;
@@ -18,18 +43,25 @@ function activityHtml(activity,index){
   if(activity.type==='choice'||activity.type==='multi'){
     const type=activity.type==='choice'?'radio':'checkbox';
     const instruction=activity.type==='multi'?'<p class="instruction">Puede existir más de una respuesta correcta.</p>':'';
-    return `<fieldset><legend>${esc(activity.question)}</legend>${instruction}${activity.options.map((option,optionIndex)=>`<label class="option"><input type="${type}" name="q-${index}" value="${optionIndex}"><span>${esc(option)}</span></label>`).join('')}</fieldset>`;
+    const displayOptions=shuffle(activity.options.map((option,optionIndex)=>({option,optionIndex})),`${data.slug}:${index}:options`);
+    if(activity.type==='choice'){
+      const targetPosition=(Number(data.number)+index+(hashSeed(data.slug)%displayOptions.length))%displayOptions.length;
+      const currentPosition=displayOptions.findIndex(item=>item.optionIndex===activity.answer[0]);
+      [displayOptions[targetPosition],displayOptions[currentPosition]]=[displayOptions[currentPosition],displayOptions[targetPosition]];
+    }
+    return `<fieldset><legend>${esc(activity.question)}</legend>${instruction}${displayOptions.map(({option,optionIndex})=>`<label class="option"><input type="${type}" name="q-${index}" value="${optionIndex}"><span>${esc(option)}</span></label>`).join('')}</fieldset>`;
   }
   if(activity.type==='order'){
-    const options=activity.items.map((item,itemIndex)=>`<option value="${itemIndex}">${esc(item)}</option>`).join('');
+    const options=shuffle(activity.items.map((item,itemIndex)=>({item,itemIndex})),`${data.slug}:${index}:order`).map(({item,itemIndex})=>`<option value="${itemIndex}">${esc(item)}</option>`).join('');
     return `<fieldset><legend>${esc(activity.question)}</legend><p class="instruction">Selecciona un elemento diferente en cada posición.</p><div class="order-grid">${activity.items.map((_,itemIndex)=>`<label><span>Posición ${itemIndex+1}</span><select><option value="">Seleccionar…</option>${options}</select></label>`).join('')}</div></fieldset>`;
   }
-  const options=activity.pairs.map(pair=>`<option value="${esc(pair.value)}">${esc(pair.option)}</option>`).join('');
+  const options=shuffle(activity.pairs,`${data.slug}:${index}:match`).map(pair=>`<option value="${esc(pair.value)}">${esc(pair.option)}</option>`).join('');
   return `<fieldset><legend>${esc(activity.question)}</legend><div class="relation-grid">${activity.pairs.map(pair=>`<label><span>${esc(pair.label)}</span><select><option value="">Seleccionar…</option>${options}</select></label>`).join('')}</div></fieldset>`;
 }
 data.stages.forEach((stage,index)=>{
+  const bloom=bloomFor(stage.activity,index);
   nav.insertAdjacentHTML('beforeend',`<button class="stage-button" type="button" data-go="${index}" aria-label="Ir a la etapa ${index+1}: ${esc(stage.eyebrow)}"><span>${index+1}</span><small>${esc(stage.eyebrow)}</small></button>`);
-  screens.insertAdjacentHTML('beforeend',`<section class="screen" data-step="${index}" aria-labelledby="stage-${index}" ${index?'hidden':''}><header class="stage-header"><img class="stage-icon" src="assets/brand/${iconFor(index)}" alt=""><div><p class="eyebrow">${esc(stage.eyebrow)}</p><h2 id="stage-${index}">${esc(stage.title)}</h2></div></header><details class="reading" open><summary>Lectura de contexto</summary><p>${esc(stage.reading)}</p><aside><strong>Conexión agroindustrial:</strong> ${esc(stage.application)}</aside></details>${visualHtml(stage)}<form class="activity" data-index="${index}" data-type="${stage.activity.type}">${activityHtml(stage.activity,index)}<button class="button" type="submit">Validar actividad</button><p class="feedback" aria-live="polite"></p></form></section>`);
+  screens.insertAdjacentHTML('beforeend',`<section class="screen" data-step="${index}" aria-labelledby="stage-${index}" ${index?'hidden':''}><header class="stage-header"><img class="stage-icon" src="assets/brand/${iconFor(index)}" alt=""><div><p class="eyebrow">${esc(stage.eyebrow)}</p><h2 id="stage-${index}">${esc(stage.title)}</h2><p class="bloom-tag">Nivel cognitivo ${bloom.level} · ${bloom.label}</p></div></header><details class="reading" open><summary>Lectura de contexto</summary><p>${esc(stage.reading)}</p><aside><strong>Conexión agroindustrial:</strong> ${esc(stage.application)}</aside></details>${visualHtml(stage)}<form class="activity" data-index="${index}" data-type="${stage.activity.type}" data-bloom="${bloom.level}">${activityHtml(stage.activity,index)}<button class="button" type="submit">Validar actividad</button><p class="feedback" aria-live="polite"></p></form></section>`);
 });
 const stageButtons=[...document.querySelectorAll('.stage-button')];
 const screenList=[...document.querySelectorAll('.screen')];
