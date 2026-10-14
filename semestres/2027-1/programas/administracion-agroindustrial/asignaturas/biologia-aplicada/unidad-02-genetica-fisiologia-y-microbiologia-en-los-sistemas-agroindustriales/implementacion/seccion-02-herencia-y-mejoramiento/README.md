@@ -2,4 +2,4 @@
 
 Herencia y mejoramiento agroindustrial
 
-Actividad interactiva autónoma con progreso validado e insignia al 100 %.
+Sección interactiva autónoma con ocho actividades, progreso validado, navegación libre e insignia al 100 %.

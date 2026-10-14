@@ -8,9 +8,9 @@ Ecología, biología molecular e innovación para la sostenibilidad agroindustri
 
 | Sección | Propósito | Evidencia interactiva |
 |---|---|---|
-| Ecosistemas y ciclos biogeoquímicos | Relacionar procesos ecológicos con entradas, extracciones y pérdidas agroindustriales. | 5 actividades autocalificables |
-| Indicadores y gestión ambiental | Seleccionar evidencia y prácticas sostenibles según el problema ambiental y sus límites. | 5 actividades autocalificables |
-| Herramientas de biología molecular | Explicar qué evidencia puede aportar una herramienta molecular y qué controles necesita. | 5 actividades autocalificables |
-| Bioinformática y trazabilidad | Reconocer el alcance de bases de datos y comparaciones de secuencias en decisiones agroindustriales. | 5 actividades autocalificables |
-| Bioeconomía y bioproductos | Comparar oportunidades de generación de valor mediante criterios técnicos, ambientales y económicos. | 5 actividades autocalificables |
-| Innovación biológica, ética y proyecto | Construir una propuesta de innovación biológica con evidencia, actores, riesgos e indicadores. | 5 actividades autocalificables |
+| Ecosistemas y ciclos biogeoquímicos | Relacionar procesos ecológicos con entradas, extracciones y pérdidas agroindustriales. | 8 actividades autocalificables |
+| Indicadores y gestión ambiental | Seleccionar evidencia y prácticas sostenibles según el problema ambiental y sus límites. | 8 actividades autocalificables |
+| Herramientas de biología molecular | Explicar qué evidencia puede aportar una herramienta molecular y qué controles necesita. | 8 actividades autocalificables |
+| Bioinformática y trazabilidad | Reconocer el alcance de bases de datos y comparaciones de secuencias en decisiones agroindustriales. | 8 actividades autocalificables |
+| Bioeconomía y bioproductos | Comparar oportunidades de generación de valor mediante criterios técnicos, ambientales y económicos. | 8 actividades autocalificables |
+| Innovación biológica, ética y proyecto | Construir una propuesta de innovación biológica con evidencia, actores, riesgos e indicadores. | 8 actividades autocalificables |
