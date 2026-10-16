@@ -28,3 +28,8 @@ Unidad: 01 · Introducción a la Biología Aplicada en la Agroindustria Sostenib
 
 - La plantilla visual y la lógica se reutilizan de las Unidades 02 y 03. Se modificó `app.js` para usar el nivel de Bloom declarado en cada actividad, mostrar las lecturas en varios párrafos y proteger el acceso a `localStorage`.
 - Las Unidades 02 y 03 conservan su versión anterior de `app.js`, con clasificación de Bloom por posición. No se modificaron.
+
+## Revisión del 16 de octubre de 2026
+
+- Se rebalancearon las opciones de selección única porque en 18 de 22 actividades la respuesta correcta era la opción más larga, lo que la delataba. Tras el ajuste lo es en 11 de 22 y en ninguna supera en más de 15 % el promedio de los distractores.
+- Todos los ZIP de la unidad se regeneraron; los hash anteriores dejan de ser válidos.

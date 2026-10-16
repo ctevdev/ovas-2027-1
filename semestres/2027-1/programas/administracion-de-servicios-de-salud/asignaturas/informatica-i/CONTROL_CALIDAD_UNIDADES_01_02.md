@@ -36,3 +36,8 @@ Programa: Administración de Servicios de Salud
 - **Módulo de la Unidad 2:** cita varias veces a Anderson (2024), que no figura en la lista de referencias del módulo ni del proyecto docente, y contiene fragmentos duplicados. No se usó esa fuente ni sus citas textuales en las actividades; los conceptos se apoyan en Arroyo Guardeño et al. (2020), Russell y Norvig (2011), Bellido y Botín (2022) y Gómez Gutiérrez (2017). Conviene corregir el módulo.
 - El módulo de la Unidad 1 solo trae cuatro referencias; las secciones completan cinco con la bibliografía del proyecto docente.
 - La Unidad 3 (semanas 11 a 14) no se construyó por falta de módulo.
+
+## Revisión del 16 de octubre de 2026
+
+- Se rebalancearon las opciones de selección única porque en 29 de 41 actividades la respuesta correcta era la opción más larga. Tras el ajuste lo es en 12 de 41 y solo en 1 supera en más de 15 % el promedio de los distractores.
+- Todos los ZIP de ambas unidades se regeneraron; los hash anteriores dejan de ser válidos. Razón máxima de longitud entre opciones: 1,44 y 1,43.
