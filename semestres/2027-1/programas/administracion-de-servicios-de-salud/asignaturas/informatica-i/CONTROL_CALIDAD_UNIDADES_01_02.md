@@ -32,7 +32,7 @@ Programa: Administración de Servicios de Salud
 
 ## Observaciones
 
-- **Paleta:** el programa no tenía paleta en los archivos disponibles. Se aplicó negro y gris según indicación del usuario, con el dorado solo en el cerebro y los acentos de la insignia, y los colores semánticos de acierto y error. Se obtiene transformando los verdes de la plantilla; si la paleta oficial incluye otros colores, se cambian en `styles.css` y `catalogo.css` y se regeneran los ZIP.
+- **Paleta:** desde el 16 de octubre de 2026 se usa la paleta indicada para el programa: azul petróleo `#123047`, teal `#087E8B`, verde digital `#24B8A6`, menta `#A6E3D7` y fondo suave `#F4FAF9`, con el dorado solo en el cerebro y los acentos de la insignia y los colores semánticos de acierto y error. Los iconos de las etapas se recolorearon con la misma paleta. Antes se había usado negro y gris provisional.
 - **Módulo de la Unidad 2:** cita varias veces a Anderson (2024), que no figura en la lista de referencias del módulo ni del proyecto docente, y contiene fragmentos duplicados. No se usó esa fuente ni sus citas textuales en las actividades; los conceptos se apoyan en Arroyo Guardeño et al. (2020), Russell y Norvig (2011), Bellido y Botín (2022) y Gómez Gutiérrez (2017). Conviene corregir el módulo.
 - El módulo de la Unidad 1 solo trae cuatro referencias; las secciones completan cinco con la bibliografía del proyecto docente.
 - La Unidad 3 (semanas 11 a 14) no se construyó por falta de módulo.
