@@ -63,7 +63,7 @@ function activityHtml(activity,index){
 data.stages.forEach((stage,index)=>{
   const bloom=bloomFor(stage.activity,index);
   nav.insertAdjacentHTML('beforeend',`<button class="stage-button" type="button" data-go="${index}" aria-label="Ir a la etapa ${index+1}: ${esc(stage.eyebrow)}"><span>${index+1}</span><small>${esc(stage.eyebrow)}</small></button>`);
-  screens.insertAdjacentHTML('beforeend',`<section class="screen" data-step="${index}" aria-labelledby="stage-${index}" ${index?'hidden':''}><header class="stage-header"><img class="stage-icon" src="assets/brand/${iconFor(index)}" alt=""><div><p class="eyebrow">${esc(stage.eyebrow)}</p><h2 id="stage-${index}">${esc(stage.title)}</h2><p class="bloom-tag">Nivel cognitivo ${bloom.level} · ${bloom.label}</p></div></header><details class="reading" open><summary>Lectura de contexto</summary>${stage.reading.split('\n\n').map(paragraph=>`<p>${esc(paragraph)}</p>`).join('')}<aside><strong>Conexión agroindustrial:</strong> ${esc(stage.application)}</aside></details>${visualHtml(stage)}<form class="activity" data-index="${index}" data-type="${stage.activity.type}" data-bloom="${bloom.level}">${activityHtml(stage.activity,index)}<button class="button" type="submit">Validar actividad</button><p class="feedback" aria-live="polite"></p></form></section>`);
+  screens.insertAdjacentHTML('beforeend',`<section class="screen" data-step="${index}" aria-labelledby="stage-${index}" ${index?'hidden':''}><header class="stage-header"><img class="stage-icon" src="assets/brand/${iconFor(index)}" alt=""><div><p class="eyebrow">${esc(stage.eyebrow)}</p><h2 id="stage-${index}">${esc(stage.title)}</h2><p class="bloom-tag">Nivel cognitivo ${bloom.level} · ${bloom.label}</p></div></header><details class="reading" open><summary>Lectura de contexto</summary>${stage.reading.split('\n\n').map(paragraph=>`<p>${esc(paragraph)}</p>`).join('')}<aside><strong>Conexión profesional:</strong> ${esc(stage.application)}</aside></details>${visualHtml(stage)}<form class="activity" data-index="${index}" data-type="${stage.activity.type}" data-bloom="${bloom.level}">${activityHtml(stage.activity,index)}<button class="button" type="submit">Validar actividad</button><p class="feedback" aria-live="polite"></p></form></section>`);
 });
 const stageButtons=[...document.querySelectorAll('.stage-button')];
 const screenList=[...document.querySelectorAll('.screen')];
@@ -102,7 +102,7 @@ document.querySelectorAll('.activity').forEach((form,index)=>form.addEventListen
   if(!answer.length||answer.some(value=>value===''||Number.isNaN(value))){feedback.textContent='Completa todos los campos antes de validar.';feedback.className='feedback error';return;}
   if(JSON.stringify(answer)===JSON.stringify(activity.answer)){
     completed.add(index);try{localStorage.setItem(storageKey,JSON.stringify([...completed]));}catch{}feedback.textContent='Correcto. '+activity.success;feedback.className='feedback success';update();
-  }else{feedback.textContent='Aún no. Revisa la lectura y la conexión agroindustrial, ajusta tu respuesta e inténtalo nuevamente.';feedback.className='feedback error';}
+  }else{feedback.textContent='Aún no. Revisa la lectura y la conexión profesional, ajusta tu respuesta e inténtalo nuevamente.';feedback.className='feedback error';}
 }));
 $('#restart').addEventListener('click',()=>{
   if(!confirm('¿Deseas borrar el avance validado y reiniciar esta sección?'))return;

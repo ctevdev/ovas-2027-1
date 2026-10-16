@@ -37,3 +37,7 @@ Programa: Administración de Empresas
 - **Referencias:** Harari (2015), Stiglitz (2002), Morin (1999) y Naciones Unidas (2015) están en el módulo de la Unidad 1 pero no en la bibliografía del proyecto docente. En la Unidad 2 el módulo cita a Nussbaum (2010, Katz Editores) y el proyecto docente a Nussbaum (2012, Paidós). Conviene unificar ambas listas.
 - **Citas textuales:** las actividades parafrasean los módulos y no reproducen sus citas ni los números de página.
 - Los casos de San Jacinto y de la Empresa Portuaria del Caribe son hipotéticos, como indican los módulos; los datos numéricos de las actividades complementarias (por ejemplo el municipio con producto en alza) son inventados con fines didácticos.
+
+## Revisión del 16 de octubre de 2026
+
+- Se corrigió el texto heredado de la plantilla agroindustrial: la etiqueta «Conexión agroindustrial» de cada etapa, el mensaje de error y una viñeta del catálogo. Ahora dicen «Conexión profesional» y «situaciones reales del ejercicio profesional».
