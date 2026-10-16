@@ -42,3 +42,4 @@ Programa: Administración de Servicios de Salud
 - Se rebalancearon las opciones de selección única porque en 29 de 41 actividades la respuesta correcta era la opción más larga. Tras el ajuste lo es en 12 de 41 y solo en 1 supera en más de 15 % el promedio de los distractores.
 - Todos los ZIP de ambas unidades se regeneraron; los hash anteriores dejan de ser válidos. Razón máxima de longitud entre opciones: 1,44 y 1,43.
 - Se corrigió además el texto heredado de la plantilla agroindustrial: la etiqueta «Conexión agroindustrial» de cada etapa, el mensaje de error y una viñeta del catálogo. Ahora dicen «Conexión profesional» y «situaciones reales del ejercicio profesional».
+- Se agregó un número de versión (`?v=20261016b`) a los CSS, JS y enlaces de sección del catálogo y de las secciones para que el navegador no use copias en caché tras una actualización.
