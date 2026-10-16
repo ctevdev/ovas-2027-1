@@ -5,6 +5,7 @@ Programa organizado para el semestre 2027-1.
 ## Asignaturas
 
 - Introducción a la Ingeniería de Software
+- Algoritmo y Programación Básica
 
 ## Identidad visual
 
