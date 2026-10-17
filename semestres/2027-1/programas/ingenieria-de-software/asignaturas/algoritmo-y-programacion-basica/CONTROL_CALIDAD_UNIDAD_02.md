@@ -24,7 +24,7 @@ Unidad: 02 · Programación estructurada con Python (semanas 5 a 10)
 
 ## Verificación del contenido técnico
 
-Se razonaron a mano los resultados de los ejemplos de Python: `"5" + "5"` da `55`; `17 // 5 + 17 % 5` da 5; `10 + 5 * 2` da 20 y `(10 + 5) * 2` da 30; `nota1 + nota2 / 2` con 4 y 2 da 5.0; `sum(range(1, 6))` da 15; el ciclo con `break` en 5 y `continue` en pares imprime 1 y 3; una tarifa de 12 000 con 30 unidades adicionales a 150 da 16 500; cinco mediciones (4, 6, 5, 7, 3) dan promedio 5.00. No se ejecutó el código en un intérprete de Python; conviene que el docente lo confirme.
+Los resultados de los ejemplos de Python de las actividades se ejecutaron en un intérprete de Python 3 y coinciden con lo planteado: `"5" + "5"` da `55`; `17 // 5 + 17 % 5` da 5; `10 + 5 * 2` da 20 y `(10 + 5) * 2` da 30; `nota1 + nota2 / 2` con 4 y 2 da 5.0; el ciclo `range(1, 6)` acumula 15; el ciclo con `break` en 5 y `continue` en los pares imprime 1 y 3; la tarifa de 12 000 con 30 unidades adicionales a 150 da 16 500; cinco mediciones (4, 6, 5, 7, 3) dan promedio 5.00; `int()` falla con `veinte`, `20.5` y la cadena vacía, y acepta `20` y `-3`; las expresiones booleanas y la condición de acceso dan los valores indicados.
 
 ## Observaciones
 
